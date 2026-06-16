@@ -1,0 +1,55 @@
+# ============================================
+# GITIGNORE - RégliCred Landing Page
+# ============================================
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Configurações de IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+
+# Arquivos de ambiente e credenciais
+.env
+.env.local
+.env.*.local
+
+# Dependências (caso futuramente use npm/yarn)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Cache
+.cache/
+
+# Arquivos de build/dist (caso futuramente use build tools)
+dist/
+build/
+
+# Arquivos grandes que não devem ir pro GitHub
+# (vídeos já estão na pasta Assets, mas se houver versões raw)
+*.mov
+*.avi
+*.mkv
+
+# Arquivos de backup
+*.bak
+*.backup
+
+# Outros
+*.zip
+*.rar
+*.7z
