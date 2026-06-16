@@ -375,5 +375,59 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== SCROLL TO TOP ON PAGE LOAD =====
   window.scrollTo(0, 0);
 
+  // ===== WHATSAPP PREMIUM EXPERIENCE =====
+  function initWaPremium() {
+    const bubble = document.getElementById('wa-message-bubble');
+    const typing = document.getElementById('wa-typing');
+    const realMessage = document.getElementById('wa-real-message');
+    const badge = document.getElementById('wa-notification');
+    const closeBtn = document.getElementById('wa-close-btn');
+    const mainBtn = document.getElementById('wa-main-btn');
+
+    if (!bubble) return;
+
+    // 1. Mostrar o balão após 6 segundos
+    setTimeout(() => {
+      bubble.classList.add('show');
+      
+      // 2. Simular digitação por 2.5 segundos antes de mostrar a mensagem
+      setTimeout(() => {
+        typing.style.display = 'none';
+        realMessage.style.display = 'block';
+        realMessage.style.opacity = '0';
+        realMessage.style.transform = 'translateY(8px)';
+        realMessage.style.transition = 'all 0.4s ease';
+        
+        requestAnimationFrame(() => {
+          realMessage.style.opacity = '1';
+          realMessage.style.transform = 'translateY(0)';
+        });
+      }, 2500);
+
+    }, 6000);
+
+    // Fechar balão
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        bubble.classList.remove('show');
+        // Mostrar notificação após fechar para manter engajamento
+        setTimeout(() => {
+          if (badge) badge.classList.add('show');
+        }, 2000);
+      });
+    }
+
+    // Ao clicar no botão, remove tudo
+    if (mainBtn) {
+      mainBtn.addEventListener('click', () => {
+        bubble.classList.remove('show');
+        if (badge) badge.classList.remove('show');
+      });
+    }
+  }
+
+  initWaPremium();
+
   console.log('🟡 RégliCred — Site carregado com sucesso');
 });
