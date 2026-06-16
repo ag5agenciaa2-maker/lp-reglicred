@@ -501,24 +501,28 @@
               <input type="text" id="cta-nome" name="nome" placeholder="Digite seu nome" required class="form-input">
             </div>
             <div class="form-group">
+              <label for="cta-email">E-mail</label>
+              <input type="email" id="cta-email" name="email" placeholder="seu@email.com" required class="form-input">
+            </div>
+            <div class="form-group">
               <label for="cta-telefone">Telefone / WhatsApp</label>
               <input type="tel" id="cta-telefone" name="telefone" placeholder="(00) 00000-0000" required class="form-input">
             </div>
             <div class="form-group">
-              <label for="cta-operacao">Tipo de operação</label>
-              <select name="operacao" required class="form-input form-select">
-                <option value="" disabled selected>Selecione</option>
-                <option value="novo">Empréstimo Novo</option>
-                <option value="refin">Refinanciamento</option>
-                <option value="portab">Portabilidade</option>
-                <option value="cartao">Cartão de Crédito Consignado</option>
-                <option value="fgts">Saque FGTS</option>
-                <option value="compra-divida">Compra de Dívida</option>
+              <label for="cta-operacao">Como podemos ajudar?</label>
+              <select name="operacao" id="cta-operacao" required class="form-input form-select">
+                <option value="" disabled selected>Selecione o serviço</option>
+                <option value="Empréstimo Novo">Empréstimo Novo</option>
+                <option value="Refinanciamento">Refinanciamento</option>
+                <option value="Portabilidade">Portabilidade</option>
+                <option value="Cartão de Crédito Consignado">Cartão de Crédito Consignado</option>
+                <option value="Saque FGTS">Saque FGTS</option>
+                <option value="Compra de Dívida">Compra de Dívida</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="cta-mensagem">Mensagem (opcional)</label>
-              <textarea name="mensagem" rows="3" placeholder="Conte-nos sobre sua necessidade" class="form-input form-textarea"></textarea>
+              <label for="cta-mensagem">Conte-nos sua situação (opcional)</label>
+              <textarea name="mensagem" id="cta-mensagem" rows="3" placeholder="Descreva sua necessidade para um atendimento mais personalizado" class="form-input form-textarea"></textarea>
             </div>
             <button type="submit" class="form-btn form-btn-lg">Enviar Solicitação</button>
             <p class="form-disclaimer">Seus dados estão seguros. Não enviamos spam.</p>

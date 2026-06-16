@@ -132,8 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const nome = form.querySelector('input[name="nome"]');
+      const email = form.querySelector('input[name="email"]');
       const telefone = form.querySelector('input[name="telefone"]');
       const operacao = form.querySelector('select[name="operacao"]');
+      const mensagem = form.querySelector('textarea[name="mensagem"]');
       
       let valid = true;
       
@@ -143,6 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
         valid = false;
       } else {
         nome.style.borderColor = '';
+      }
+      
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+        email.style.borderColor = '#c0392b';
+        valid = false;
+      } else {
+        email.style.borderColor = '';
       }
       
       // Validate phone
@@ -163,10 +174,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       if (valid) {
-        // Build WhatsApp message
+        // Build WhatsApp message with structured list (Skill AG5 format)
         const tipoOperacao = operacao.options[operacao.selectedIndex].text;
-        const mensagem = `Olá! Meu nome é ${nome.value.trim()} e gostaria de simular um ${tipoOperacao}. Meu telefone é ${telefone.value}.`;
-        const whatsappUrl = `https://wa.me/5521980092063?text=${encodeURIComponent(mensagem)}`;
+        const mensagemExtra = mensagem.value.trim() ? mensagem.value.trim() : 'Não informada';
+        
+        const whatsappText = `Olá, me chamo ${nome.value.trim()}, vim através do site e gostaria de uma informação.
+
+- E-mail: ${email.value.trim()}
+- Telefone: ${telefone.value}
+- Serviço: ${tipoOperacao}
+- Situação: ${mensagemExtra}`;
+        
+        const whatsappUrl = `https://wa.me/5521980092063?text=${encodeURIComponent(whatsappText)}`;
         window.open(whatsappUrl, '_blank');
       }
     });
