@@ -9,12 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cookie-banner.css">
 </head>
 <body>
   <!-- Loading Screen -->
   <div class="loading-screen" id="loading-screen">
     <div class="loading-content">
-      <img src="Assets/logo-mobile-reglicred.webp" alt="RégliCred" class="loading-logo">
+      <img src="Assets/logo-reglicred-mobile.webp" alt="RégliCred" class="loading-logo">
       <div class="loading-bar"><div class="loading-progress"></div></div>
       <p class="loading-text">Carregando...</p>
     </div>
@@ -24,7 +25,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#hero" class="nav-logo">
-        <img src="Assets/logo-desktop-reglicred.webp" alt="RégliCred" class="logo-img">
+        <img src="Assets/logo-reglicred-desktop.webp" alt="RégliCred" class="logo-img">
         <span class="logo-text">Régli<span class="gold">Cred</span></span>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
@@ -51,7 +52,7 @@
           <span class="badge-star">★★★★★</span>
           <span>5,0 no Google · 255 avaliações · ~20 anos no mercado</span>
         </div>
-        <h1 class="hero-title">Empréstimo Consignado<br>com a <span class="gold">melhor taxa</span> do mercado</h1>
+        <h1 class="hero-title">Empréstimo Consignado com a <span class="gold">melhor taxa</span> do mercado</h1>
         <p class="hero-subtitle">Criada por servidor para servidor. Assessoria personalizada, estrutura própria e as menores taxas. Atendimento humano do início ao fim.</p>
         <div class="hero-ctas">
           <a href="#cta" class="hero-cta-btn">Quero Simular Agora</a>
@@ -60,7 +61,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-image-wrapper">
-          <img src="Assets/reglicred-empréstimo+consignado-sao+cristovao (1).webp" alt="Atendimento RégliCred" class="hero-image" loading="eager">
+          <img src="Assets/reglicred-fachada-loja-sao-cristovao.webp" alt="Fachada da loja RégliCred Empréstimo Consignado em São Cristóvão, RJ" class="hero-image" loading="eager">
           <div class="hero-float-card card-1">
             <span class="float-icon">✓</span>
             <div>
@@ -112,7 +113,7 @@
       <div class="dor-solucao-grid">
         <div class="dor-box reveal">
           <h3 class="dor-title">O Problema</h3>
-          <h2>Servidor público mal atendido,<br>sem tempo e sem orientação</h2>
+          <h2>Servidor público mal atendido, sem tempo e sem orientação</h2>
           <p>Você conhece bem: corretores que desaparecem, gerentes de banco que não têm tempo, taxas escondidas no contrato e aquela sensação de estar sozinho lidando com dinheiro.</p>
           <ul class="dor-list">
             <li><span class="x-icon">✕</span> Rotina corrida, sem tempo de ir ao banco</li>
@@ -121,9 +122,14 @@
             <li><span class="x-icon">✕</span> Sem assessoria personalizada</li>
           </ul>
         </div>
+        <div class="dor-solucao-divider" aria-hidden="true">
+          <div class="divider-line"></div>
+          <span class="divider-arrow">→</span>
+          <div class="divider-line"></div>
+        </div>
         <div class="solucao-box reveal">
           <h3 class="solucao-title">A Solução</h3>
-          <h2>A RégliCred cuida de você<br>do início ao fim</h2>
+          <h2>A RégliCred cuida de você do início ao fim</h2>
           <p>Criada por um servidor público que viveu na pele essas dificuldades. Aqui você encontra atendimento humano, taxas justas e alguém que acompanha cada etapa — da simulação à liberação.</p>
           <ul class="solucao-list">
             <li><span class="check-icon">✓</span> Atendimento personalizado e humanizado</li>
@@ -163,22 +169,22 @@
           <p>Transfira seu consignado para outro banco com taxas menores.</p>
           <a href="#cta" class="bento-link">Saiba mais →</a>
         </div>
-        <div class="bento-card reveal" data-delay="0">
+        <div class="bento-card reveal" data-delay="100">
           <div class="bento-icon">💳</div>
           <h3>Cartão de Crédito Consignado</h3>
           <p>Cartão com desconto direto na folha de pagamento.</p>
           <a href="#cta" class="bento-link">Saiba mais →</a>
         </div>
-        <div class="bento-card reveal" data-delay="100">
+        <div class="bento-card reveal" data-delay="200">
           <div class="bento-icon">🏦</div>
           <h3>Saque FGTS</h3>
           <p>Antecipe seu saque-aniversário do FGTS com segurança.</p>
           <a href="#cta" class="bento-link">Saiba mais →</a>
         </div>
-        <div class="bento-card reveal" data-delay="200">
+        <div class="bento-card reveal" data-delay="0">
           <div class="bento-icon">📊</div>
           <h3>Compra de Dívida</h3>
-          <p>Quitemos suas dívidas com condições especiais e parcelamento.</p>
+          <p>Quitamos suas dívidas com condições especiais e parcelamento.</p>
           <a href="#cta" class="bento-link">Saiba mais →</a>
         </div>
       </div>
@@ -269,19 +275,19 @@
       </div>
       <div class="gallery-grid">
         <div class="gallery-item gallery-large reveal">
-          <img src="Assets/reglicred-empréstimo+consignado-sao+cristovao (1) (1).webp" alt="Sala de atendimento RégliCred" loading="lazy">
+          <img src="Assets/reglicred-sala-atendimento-consignado-1.webp" alt="Sala de atendimento ao cliente no escritório próprio da RégliCred" loading="lazy">
           <div class="gallery-overlay">
             <span>Estrutura completa para receber você</span>
           </div>
         </div>
         <div class="gallery-item reveal">
-          <img src="Assets/reglicred-empréstimo+consignado-sao+cristovao (1) (4).webp" alt="Fachada RégliCred" loading="lazy">
+          <img src="Assets/reglicred-escritorio-mesas-atendimento.webp" alt="Escritório com mesas de atendimento da RégliCred em São Cristóvão" loading="lazy">
           <div class="gallery-overlay">
             <span>Nossa loja em São Cristóvão</span>
           </div>
         </div>
         <div class="gallery-item reveal">
-          <img src="Assets/reglicred-empréstimo+consignado-sao+cristovao (1) (2).webp" alt="Estrutura Física RégliCred" loading="lazy">
+          <img src="Assets/reglicred-sala-atendimento-consignado-2.webp" alt="Atendente e estrutura física da loja RégliCred" loading="lazy">
           <div class="gallery-overlay">
             <span>Criada por servidor, para servidor</span>
           </div>
@@ -501,7 +507,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="#hero" class="footer-logo">
-            <img src="Assets/logo-desktop-reglicred.webp" alt="RégliCred" class="logo-img">
+            <img src="Assets/logo-reglicred-desktop.webp" alt="RégliCred" class="logo-img">
             <span class="logo-text">Régli<span class="gold">Cred</span></span>
           </a>
           <p>Empréstimo Consignado e Assessoria Financeira. Criada por servidor, para servidor. ~20 anos de mercado.</p>
@@ -527,15 +533,52 @@
         </div>
         <div class="footer-contact">
           <h4>Contato</h4>
-          <p><a href="https://wa.me/5521980092063" target="_blank" rel="noopener">📱 (21) 98009-2063</a></p>
-          <p>📍 <a href="https://www.google.com/maps/dir//R.+Eduardo+Prado,+18+-+Imperial+de+S%C3%A3o+Crist%C3%B3v%C3%A3o,+Rio+de+Janeiro+-+RJ,+20940-020" target="_blank" rel="noopener">R. Eduardo Prado, 18 — São Cristóvão, RJ</a></p>
-          <p>🕐 Seg. a Sex.: 08:00 às 18:00</p>
+          <p class="contact-item">
+            <a href="https://www.google.com/search?q=R%C3%A9gliCred+Empr%C3%A9stimo+Consignado" target="_blank" rel="noopener noreferrer">
+              <span class="contact-icon">🏢</span>
+              <span>RégliCred Empréstimo Consignado</span>
+            </a>
+          </p>
+          <p class="contact-item">
+            <a href="https://www.google.com/maps/dir//R.+Eduardo+Prado,+18+-+Imperial+de+S%C3%A3o+Crist%C3%B3v%C3%A3o,+Rio+de+Janeiro+-+RJ,+20940-020" target="_blank" rel="noopener noreferrer">
+              <span class="contact-icon">📍</span>
+              <span>R. Eduardo Prado, 18 — São Cristóvão, RJ</span>
+            </a>
+          </p>
+          <p class="contact-item">
+            <a href="https://wa.me/5521980092063" target="_blank" rel="noopener">
+              <span class="contact-icon">📱</span>
+              <span>(21) 98009-2063</span>
+            </a>
+          </p>
+          <p class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <span>Seg. a Sex.: 08:00 às 18:00</span>
+          </p>
           <a href="https://instagram.com/regli_cred" target="_blank" rel="noopener" class="footer-instagram">📸 @regli_cred</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© Réglicred Empréstimo Consignado 2026</p>
-        <p>Desenvolvido por <a href="https://www.ag5agencia.com.br" target="_blank" rel="noopener" class="ag5-link">AG5 Agência</a></p>
+        <div class="footer-credits-left">
+          <p class="footer-copyright-text">© Réglicred Empréstimo Consignado 2026</p>
+          <div class="footer-legal-links">
+            <a href="#" id="ck-prefs-link" class="cookie-link">
+              <span class="cookie-toggle" id="cookie-toggle">
+                <span class="cookie-toggle-check">✓</span>
+                <span class="cookie-toggle-x">✕</span>
+                <span class="cookie-toggle-dot" id="cookie-toggle-dot"></span>
+              </span>
+              Cookie
+            </a>
+            <span class="legal-links-separator">|</span>
+            <a href="termos-e-condicoes.html">Termos e Condições</a>
+            <span class="legal-links-separator">|</span>
+            <a href="politica-de-privacidade.html">Política de Privacidade</a>
+          </div>
+        </div>
+        <div class="footer-credits-right">
+          <p>Desenvolvido por <a href="https://www.ag5agencia.com.br" target="_blank" rel="noopener" class="ag5-link">AG5 Agência</a></p>
+        </div>
       </div>
     </div>
   </footer>
@@ -545,6 +588,139 @@
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
+  <!-- Mobile Drawer (posicionado no final do body para evitar stacking context issues) -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <a href="#hero" class="drawer-logo" id="drawer-logo-link">
+        <img src="Assets/logo-reglicred-mobile.webp" alt="RégliCred" class="logo-img">
+        <span class="logo-text">Régli<span class="gold">Cred</span></span>
+      </a>
+      <button class="drawer-close" id="drawer-close" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav class="drawer-nav">
+      <ul class="drawer-menu">
+        <li><a href="#hero" class="drawer-link">Início</a></li>
+        <li><a href="#dor-solucao" class="drawer-link">Sobre</a></li>
+        <li><a href="#servicos" class="drawer-link">Serviços</a></li>
+        <li><a href="#como-funciona" class="drawer-link">Como Funciona</a></li>
+        <li><a href="#depoimentos" class="drawer-link">Depoimentos</a></li>
+        <li><a href="#sobre" class="drawer-link">Nossa História</a></li>
+        <li><a href="#localizacao" class="drawer-link">Onde Estamos</a></li>
+      </ul>
+    </nav>
+    <div class="drawer-footer">
+      <a href="#cta" class="drawer-cta">Simular Empréstimo</a>
+    </div>
+  </aside>
+
   <script src="script.js"></script>
+  <!-- Cookie Banner -->
+  <div id="ck-banner" class="ck-banner" role="dialog" aria-modal="true" aria-label="Aviso de cookies" aria-live="polite" aria-hidden="true">
+    <div class="ck-banner__inner">
+      <div class="ck-banner__content">
+        <h2 class="ck-banner__title">Valorizamos sua privacidade</h2>
+        <p class="ck-banner__text">
+          Utilizamos cookies para aprimorar sua experiência de navegação, exibir conteúdo
+          personalizado e analisar nosso tráfego. Ao clicar em <strong>"Aceitar todos"</strong>,
+          você concorda com nosso uso de cookies conforme nossa
+          <a href="politica-de-privacidade.html" class="ck-banner__link">Política de Privacidade</a>.
+        </p>
+      </div>
+      <div class="ck-banner__actions">
+        <button id="ck-customize" class="ck-btn ck-btn--ghost">Personalizar</button>
+        <button id="ck-reject" class="ck-btn ck-btn--outline">Rejeitar</button>
+        <button id="ck-accept-all" class="ck-btn ck-btn--primary">Aceitar todos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Modal -->
+  <div id="ck-modal" class="ck-modal" role="dialog" aria-modal="true" aria-label="Personalizar preferências de cookies" aria-hidden="true">
+    <div class="ck-modal__overlay" id="ck-modal-overlay"></div>
+    <div class="ck-modal__box">
+      <div class="ck-modal__header">
+        <h2 class="ck-modal__title">Personalizar preferências de consentimento</h2>
+        <button class="ck-modal__close" id="ck-modal-close" aria-label="Fechar modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="ck-modal__body">
+        <p class="ck-modal__intro">
+          Utilizamos cookies para ajudar você a navegar com eficiência e executar certas funções.
+          Os cookies classificados como <strong>"Necessário"</strong> são essenciais para o
+          funcionamento básico do site e não podem ser desativados.
+        </p>
+        <div class="ck-category">
+          <div class="ck-category__header">
+            <div class="ck-category__info">
+              <h3 class="ck-category__name">Necessário</h3>
+              <p class="ck-category__desc">Essenciais para o funcionamento do site. Não armazenam dados pessoalmente identificáveis.</p>
+            </div>
+            <span class="ck-category__badge">Sempre ativo</span>
+          </div>
+        </div>
+        <div class="ck-category">
+          <div class="ck-category__header">
+            <div class="ck-category__info">
+              <h3 class="ck-category__name">Funcional</h3>
+              <p class="ck-category__desc">Ajudam a executar funcionalidades como compartilhamento em mídia social e recursos de terceiros.</p>
+            </div>
+            <label class="ck-toggle" aria-label="Ativar cookies funcionais">
+              <input type="checkbox" id="ck-functional" name="functional">
+              <span class="ck-toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="ck-category">
+          <div class="ck-category__header">
+            <div class="ck-category__info">
+              <h3 class="ck-category__name">Analítico</h3>
+              <p class="ck-category__desc">Usados para entender como os visitantes interagem com o site (visitantes, taxa de rejeição, etc.).</p>
+            </div>
+            <label class="ck-toggle" aria-label="Ativar cookies analíticos">
+              <input type="checkbox" id="ck-analytics" name="analytics">
+              <span class="ck-toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="ck-category">
+          <div class="ck-category__header">
+            <div class="ck-category__info">
+              <h3 class="ck-category__name">Desempenho</h3>
+              <p class="ck-category__desc">Analisam índices de desempenho do site para oferecer melhor experiência ao visitante.</p>
+            </div>
+            <label class="ck-toggle" aria-label="Ativar cookies de desempenho">
+              <input type="checkbox" id="ck-performance" name="performance">
+              <span class="ck-toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="ck-category">
+          <div class="ck-category__header">
+            <div class="ck-category__info">
+              <h3 class="ck-category__name">Publicidade</h3>
+              <p class="ck-category__desc">Entregam anúncios personalizados com base nas páginas visitadas anteriormente.</p>
+            </div>
+            <label class="ck-toggle" aria-label="Ativar cookies de publicidade">
+              <input type="checkbox" id="ck-advertising" name="advertising">
+              <span class="ck-toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="ck-modal__footer">
+        <button id="ck-modal-reject" class="ck-btn ck-btn--outline">Rejeitar</button>
+        <button id="ck-modal-save" class="ck-btn ck-btn--ghost">Salvar Preferências</button>
+        <button id="ck-modal-accept-all" class="ck-btn ck-btn--primary">Aceitar todos</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="cookie-banner.js" defer></script>
 </body>
 </html>
