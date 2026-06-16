@@ -448,5 +448,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initWaPremium();
 
+  // ===== SERVIÇOS SPOTLIGHT GRID =====
+  const servicosSection = document.getElementById('servicos');
+  const servicosSpotlight = document.getElementById('servicos-spotlight');
+  const svcTiles = document.querySelectorAll('.svc-tile');
+  
+  if (servicosSection && servicosSpotlight) {
+    servicosSection.addEventListener('mousemove', (e) => {
+      const rect = servicosSection.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      servicosSpotlight.style.setProperty('--mouse-x', `${x}%`);
+      servicosSpotlight.style.setProperty('--mouse-y', `${y}%`);
+    });
+  }
+  
+  // Tile-level spotlight
+  svcTiles.forEach(tile => {
+    const spotlight = tile.querySelector('.svc-tile-spotlight');
+    if (spotlight) {
+      tile.addEventListener('mousemove', (e) => {
+        const rect = tile.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        spotlight.style.setProperty('--tile-x', `${x}%`);
+        spotlight.style.setProperty('--tile-y', `${y}%`);
+      });
+    }
+  });
+
+  // ===== PROCESS TIMELINE LINE FILL =====
+  const processLineFill = document.getElementById('process-line-fill');
+  const processSteps = document.querySelectorAll('.process-step');
+  
+  if (processLineFill && processSteps.length > 0) {
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          processLineFill.classList.add('active');
+          timelineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    const timelineContainer = document.querySelector('.process-timeline');
+    if (timelineContainer) {
+      timelineObserver.observe(timelineContainer);
+    }
+  }
+
   console.log('🟡 RégliCred — Site carregado com sucesso');
 });
