@@ -497,5 +497,290 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ===== VIDEO HISTORY, GRID & PREMIUM MODAL FUNCTIONS =====
+  const mainVideo = document.getElementById('historia-video');
+  const modalVideo = document.getElementById('modal-video');
+  const premiumModal = document.getElementById('video-premium-modal');
+  const btnPageAudio = document.getElementById('btn-page-audio');
+  const btnModalAudio = document.getElementById('modal-btn-audio');
+  const mainPlayIcon = document.querySelector('#main-video-container .video-play-icon');
+  
+  let activeMainVideoElement = null; // Guarda qual vídeo da página foi expandido no modal
+
+  // 1. Play / Pause do vídeo da página de história
+  window.toggleMainVideoPlay = function() {
+    if (!mainVideo) return;
+    const mainContainer = document.getElementById('main-video-container');
+    
+    // Pausa outros vídeos tocando no grid
+    document.querySelectorAll('.premium-grid-video').forEach(v => {
+      if (!v.paused) {
+        v.pause();
+        const otherIcon = v.parentElement.querySelector('.video-play-icon');
+        if (otherIcon) otherIcon.classList.remove('playing');
+      }
+    });
+
+    if (mainVideo.paused) {
+      mainVideo.play();
+      // Ativa o som automaticamente ao dar play
+      mainVideo.muted = false;
+      if (btnPageAudio) btnPageAudio.classList.add('sound-active');
+      if (mainPlayIcon) mainPlayIcon.classList.add('playing');
+      if (mainContainer) mainContainer.classList.add('playing');
+    } else {
+      mainVideo.pause();
+      if (mainPlayIcon) mainPlayIcon.classList.remove('playing');
+      if (mainContainer) mainContainer.classList.remove('playing');
+    }
+  };
+
+  // 2. Mute / Unmute do vídeo da página de história
+  window.toggleMainVideoMute = function(e) {
+    if (e) e.stopPropagation();
+    if (!mainVideo || !btnPageAudio) return;
+    mainVideo.muted = !mainVideo.muted;
+    if (mainVideo.muted) {
+      btnPageAudio.classList.remove('sound-active');
+    } else {
+      btnPageAudio.classList.add('sound-active');
+      // Se estava pausado ao tirar o mudo, dá play
+      if (mainVideo.paused) {
+        mainVideo.play();
+        if (mainPlayIcon) mainPlayIcon.classList.add('playing');
+      }
+    }
+  };
+
+  // 3. Play / Pause genérico para os vídeos do grid premium
+  window.toggleGridVideoPlay = function(videoId) {
+    const video = document.getElementById(videoId);
+    if (!video) return;
+    
+    const playIcon = video.parentElement.querySelector('.video-play-icon');
+    
+    // Pausa qualquer outro vídeo (inclusive história) que esteja tocando
+    document.querySelectorAll('.premium-grid-video, #historia-video').forEach(v => {
+      if (v.id !== videoId && !v.paused) {
+        v.pause();
+        const otherIcon = v.parentElement.querySelector('.video-play-icon');
+        if (otherIcon) otherIcon.classList.remove('playing');
+      }
+    });
+
+    if (video.paused) {
+      video.play();
+      if (playIcon) playIcon.classList.add('playing');
+    } else {
+      video.pause();
+      if (playIcon) playIcon.classList.remove('playing');
+    }
+  };
+
+  // 4. Mute / Unmute genérico para os vídeos do grid premium
+  window.toggleGridVideoMute = function(e, videoId) {
+    if (e) e.stopPropagation();
+    const video = document.getElementById(videoId);
+    if (!video) return;
+    
+    video.muted = !video.muted;
+    const audioBtn = video.parentElement.querySelector('.grid-audio-btn');
+    
+    if (audioBtn) {
+      if (video.muted) {
+        audioBtn.innerHTML = '<span class="btn-icon">🔇</span>';
+      } else {
+        audioBtn.innerHTML = '<span class="btn-icon">🔊</span>';
+        // Se estava pausado ao tirar o mudo, dá play
+        if (video.paused) {
+          video.play();
+          const playIcon = video.parentElement.querySelector('.video-play-icon');
+          if (playIcon) playIcon.classList.add('playing');
+        }
+      }
+    }
+  };
+
+  // 5. Abrir Modal Premium com Vídeo Dinâmico (serve para história ou grid)
+  window.openPremiumModalDynamic = function(e, videoId) {
+    if (e) e.stopPropagation();
+    const sourceVideo = document.getElementById(videoId);
+    if (!sourceVideo || !modalVideo || !premiumModal) return;
+
+    activeMainVideoElement = sourceVideo;
+
+    // Atualiza a fonte de mídia no modal baseada no vídeo de origem
+    const sourceElement = sourceVideo.querySelector('source');
+    if (sourceElement) {
+      modalVideo.src = sourceElement.src;
+      modalVideo.load(); // Recarrega o player do modal
+    }
+
+    // Sincroniza currentTime e volume/muted
+    modalVideo.currentTime = sourceVideo.currentTime;
+    modalVideo.muted = sourceVideo.muted;
+    
+    // Atualiza botão de áudio no modal
+    if (btnModalAudio) {
+      if (modalVideo.muted) {
+        btnModalAudio.innerHTML = '<span class="modal-control-icon">🔇</span> Ativar Som';
+      } else {
+        btnModalAudio.innerHTML = '<span class="modal-control-icon">🔊</span> Sem Som';
+      }
+    }
+
+    // Pausa o vídeo de origem
+    sourceVideo.pause();
+    const playIcon = sourceVideo.parentElement.querySelector('.video-play-icon');
+    if (playIcon) playIcon.classList.remove('playing');
+
+    // Abre o modal e inicia
+    premiumModal.classList.add('active');
+    modalVideo.play();
+  };
+
+  // Atalho para manter compatibilidade com o vídeo da história
+  window.openPremiumModal = function(e) {
+    window.openPremiumModalDynamic(e, 'historia-video');
+  };
+
+  // 6. Fechar Modal Premium (Sincroniza de volta para o player correto na página)
+  window.closePremiumModal = function() {
+    if (!modalVideo || !premiumModal) return;
+
+    modalVideo.pause();
+    premiumModal.classList.remove('active');
+
+    if (activeMainVideoElement) {
+      // Sincroniza currentTime e muted de volta
+      activeMainVideoElement.currentTime = modalVideo.currentTime;
+      activeMainVideoElement.muted = modalVideo.muted;
+
+      // Atualiza os botões correspondentes na página
+      if (activeMainVideoElement.id === 'historia-video') {
+        if (btnPageAudio) {
+          if (activeMainVideoElement.muted) {
+            btnPageAudio.classList.remove('sound-active');
+          } else {
+            btnPageAudio.classList.add('sound-active');
+          }
+        }
+      } else {
+        const gridAudioBtn = activeMainVideoElement.parentElement.querySelector('.grid-audio-btn');
+        if (gridAudioBtn) {
+          gridAudioBtn.innerHTML = activeMainVideoElement.muted ? '<span class="btn-icon">🔇</span>' : '<span class="btn-icon">🔊</span>';
+        }
+      }
+
+      // Reinicia reprodução na página e ativa ícone correspondente
+      activeMainVideoElement.play();
+      const playIcon = activeMainVideoElement.parentElement.querySelector('.video-play-icon');
+      if (playIcon) playIcon.classList.add('playing');
+      
+      // Adiciona classe playing no container para controles sempre visíveis
+      const parentContainer = activeMainVideoElement.parentElement;
+      if (parentContainer) parentContainer.classList.add('playing');
+      
+      activeMainVideoElement = null; // Reseta referência
+    }
+  };
+
+  // 7. Mute / Unmute do vídeo do modal
+  window.toggleModalVideoMute = function() {
+    if (!modalVideo || !btnModalAudio) return;
+    modalVideo.muted = !modalVideo.muted;
+    if (modalVideo.muted) {
+      btnModalAudio.innerHTML = '<span class="modal-control-icon">🔇</span> Ativar Som';
+    } else {
+      btnModalAudio.innerHTML = '<span class="modal-control-icon">🔊</span> Sem Som';
+    }
+  };
+
+  // 8. Fullscreen sem Zoom (contain) no clique de expandir dentro do modal
+  window.expandModalVideoFullscreen = function() {
+    if (!modalVideo) return;
+    if (modalVideo.requestFullscreen) {
+      modalVideo.requestFullscreen();
+    } else if (modalVideo.webkitRequestFullscreen) {
+      modalVideo.webkitRequestFullscreen();
+    } else if (modalVideo.msRequestFullscreen) {
+      modalVideo.msRequestFullscreen();
+    }
+  };
+
+  // ===== CALCULADORA DE EMPRÉSTIMO =====
+  window.setCalcTab = function(btn) {
+    const tabs = document.querySelectorAll('.calc-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    updateCalculator();
+  };
+
+  window.updateCalculator = function() {
+    const valSlider = document.getElementById('calc-val-slider');
+    const parcSlider = document.getElementById('calc-parc-slider');
+    const valTxt = document.getElementById('calc-val-txt');
+    const parcTxt = document.getElementById('calc-parc-txt');
+    const parcelaVal = document.getElementById('calc-parcela-val');
+    const taxaVal = document.getElementById('calc-taxa-val');
+    const whatsappBtn = document.getElementById('calc-whatsapp-btn');
+
+    if (!valSlider || !parcSlider) return;
+
+    const valor = parseFloat(valSlider.value);
+    const parcelas = parseInt(parcSlider.value);
+    
+    const activeTab = document.querySelector('.calc-tab.active');
+    const taxa = activeTab ? parseFloat(activeTab.getAttribute('data-taxa')) : 0.0125;
+
+    // Atualiza os textos dos displays
+    valTxt.innerText = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    parcTxt.innerText = `${parcelas} meses`;
+
+    // Atualiza a exibição da taxa em porcentagem
+    taxaVal.innerText = `${(taxa * 100).toFixed(2)}% a.m.`;
+
+    // Calcula a parcela usando a fórmula Price: P = V * [i * (1 + i)^n] / [(1 + i)^n - 1]
+    const parcela = valor * (taxa * Math.pow(1 + taxa, parcelas)) / (Math.pow(1 + taxa, parcelas) - 1);
+    
+    // Formatado como moeda brasileira
+    const parcelaFormatada = parcela.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    parcelaVal.innerText = parcelaFormatada;
+
+    // Atualiza o link do WhatsApp com mensagem personalizada estruturada
+    const activeTabName = activeTab ? activeTab.innerText : 'Novo';
+    const whatsappBaseUrl = "https://wa.me/5521980092063";
+    const whatsappText = `Olá, realizei uma simulação no site e gostaria de garantir minhas condições:
+    
+- Serviço: Empréstimo Consignado (${activeTabName})
+- Valor Simulado: R$ ${valor.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}
+- Prazo Simulado: ${parcelas} parcelas (meses)
+- Parcela Estimada: ${parcelaFormatada}
+- Taxa Mensal Referência: ${(taxa * 100).toFixed(2)}% a.m.
+    
+Gostaria de dar andamento com um assessor para aprovação do crédito.`;
+
+    whatsappBtn.href = `${whatsappBaseUrl}?text=${encodeURIComponent(whatsappText)}`;
+  };
+
+  // Função segura para abrir WhatsApp da calculadora (garante que o href foi atualizado)
+  window.openCalcWhatsApp = function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('calc-whatsapp-btn');
+    if (!btn) return;
+    
+    // Força atualização do href antes de abrir
+    updateCalculator();
+    
+    // Abre o link em nova aba
+    const href = btn.getAttribute('href');
+    if (href && href !== 'javascript:void(0);') {
+      window.open(href, '_blank');
+    }
+  };
+
+  // Inicializa a calculadora
+  updateCalculator();
+
   console.log('🟡 RégliCred — Site carregado com sucesso');
 });

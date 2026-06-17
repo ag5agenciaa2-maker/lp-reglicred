@@ -13,11 +13,11 @@
 | `logo-desktop-reglicred.webp` | `logo-reglicred-desktop.webp` | Logo no header e footer | Logo principal em telas desktop |
 | `logo-mobile-reglicred.webp` | `logo-reglicred-mobile.webp` | Logo na loading screen e drawer | Logo em telas mobile e loading |
 | `reglicred-empréstimo+consignado-sao+cristovao (1).webp` | `reglicred-fachada-loja-sao-cristovao.webp` | Banner principal do Hero | Imagem de destaque (Hero) / Localização |
-| `reglicred-empréstimo+consignado-sao+cristovao (1) (1).webp` | `reglicred-sala-atendimento-consignado-1.webp` | Imagem 1 da galeria | Galeria de estrutura e atendimento |
-| `reglicred-empréstimo+consignado-sao+cristovao (1) (2).webp` | `reglicred-sala-atendimento-consignado-2.webp` | Imagem 3 da galeria | Galeria de estrutura (foco decoração e atendente) |
-| `reglicred-empréstimo+consignado-sao+cristovao (1) (3).webp` | `reglicred-acesso-cadeirante-fachada.webp` | Não utilizada no HTML | Galeria / Seção de Acessibilidade e Localização |
-| `reglicred-empréstimo+consignado-sao+cristovao (1) (4).webp` | `reglicred-escritorio-mesas-atendimento.webp` | Imagem 2 da galeria | Galeria de estrutura (mesas de atendimento) |
-| `reglicred-empréstimo+consignado-sao+cristovao (1).mp4` | `reglicred-video-sargento-regli-apresentacao.mp4` | Não utilizada no HTML | Seção de vídeo institucional ou introdução do fundador |
+| `reglicred-empréstimo+consignado-sao+cristovao (1) (1).webp` | `reglicred-sala-atendimento-consignado-1.webp` | Card Conforto na seção Estrutura | Galeria de estrutura e atendimento |
+| `reglicred-empréstimo+consignado-sao+cristovao (1) (2).webp` | `reglicred-sala-atendimento-consignado-2.webp` | Não utilizada no HTML | Galeria de estrutura (foco decoração e atendente) |
+| `reglicred-empréstimo+consignado-sao+cristovao (1) (3).webp` | `reglicred-acesso-cadeirante-fachada.webp` | Card Acessibilidade (Destaque) na seção Estrutura | Galeria / Seção de Acessibilidade e Localização |
+| `reglicred-empréstimo+consignado-sao+cristovao (1) (4).webp` | `reglicred-escritorio-mesas-atendimento.webp` | Card Localização na seção Estrutura | Galeria de estrutura (mesas de atendimento) |
+| `reglicred-empréstimo+consignado-sao+cristovao (1).mp4` | `reglicred-video-sargento-regli-apresentacao.mp4` | Seção Nossa História | Seção de vídeo institucional ou introdução do fundador |
 | `reglicred-empréstimo+consignado-sao+cristovao (2).mp4` | `reglicred-video-sargento-regli-consignado-x-financiamento.mp4` | Não utilizada no HTML | Seção de Dicas Financeiras / FAQ |
 | `reglicred-empréstimo+consignado-sao+cristovao (3).mp4` | `reglicred-video-sargento-regli-alerta-golpe-pix.mp4` | Não utilizada no HTML | Seção institucional de segurança e confiabilidade |
 | `reglicred-empréstimo+consignado-sao+cristovao (4).mp4` | `reglicred-video-tour-loja-atendimento.mp4` | Não utilizada no HTML | Galeria de fotos/vídeos da estrutura física em loop |
@@ -79,7 +79,7 @@
 ### reglicred-empréstimo+consignado-sao+cristovao (1) (1).webp
 
 **Descrição:** Foto do interior moderno e bem iluminado da loja de atendimento da RégliCred. O fundo possui uma parede amarela vibrante decorada com a logo azul em alto-relevo tridimensional "RC RégliCred". O escritório conta com mesas de atendimento brancas com computadores (monitores pretos), teclado e uma multifuncional Brother posicionada ao fundo. Cadeiras de escritório e de atendimento azuis em plástico dão o contraste com o piso amadeirado claro. Uma divisória de vidro à esquerda divide o ambiente de forma elegante.
-**Contexto de uso atual:** Primeira imagem do grid de galeria na seção "Nossa Estrutura".
+**Contexto de uso atual:** Card Conforto na seção "Nossa Estrutura" (linha 356 do HTML).
 **Sugestões de uso no site:**
 - 🥇 **Uso principal recomendado:** Galeria de fotos ou seção "Sobre nós" para mostrar o conforto e a infraestrutura física própria.
 - 🥈 **Uso alternativo 1:** Fundo de seções institucionais de credibilidade.
@@ -92,7 +92,7 @@
 ### reglicred-empréstimo+consignado-sao+cristovao (1) (2).webp
 
 **Descrição:** Foto do interior da loja física sob um ângulo mais amplo, mostrando a sala decorada com bandeiras e bandeirolas do Brasil penduradas no teto. Uma atendente vestindo uniforme com camisa verde e amarela e headset trabalha de frente para o computador na mesa da esquerda. Ao fundo, vê-se o ar-condicionado Split e, na parede da direita, um grande letreiro "MAIS CORRESPONDENTE AUTORIZADO" em azul e amarelo.
-**Contexto de uso atual:** Terceira imagem da galeria na seção "Nossa Estrutura" (linha 284 do HTML).
+**Contexto de uso atual:** Não utilizada no HTML (presente apenas na pasta `Assets/`).
 **Sugestões de uso no site:**
 - 🥇 **Uso principal recomendado:** Galeria de estrutura e seção "Nossa História" para ilustrar a equipe ativa e o atendimento presencial.
 - ⚠️ **Evitar usar em:** Imagens de Hero, pois a decoração temática sazonal (Brasil/Copa) tira o foco do corporativo atemporal.
@@ -104,7 +104,7 @@
 ### reglicred-empréstimo+consignado-sao+cristovao (1) (3).webp
 
 **Descrição:** Foto externa da fachada em enquadramento vertical e mais aberto. Destaca a calçada em frente pintada de azul royal com o símbolo oficial de acessibilidade (cadeirante) em branco. Mostra também a rampa revestida de pastilhas amarelas e o corrimão de segurança pintado de amarelo que facilita o acesso ao interior da loja RégliCred.
-**Contexto de uso atual:** Não utilizada no HTML (presente apenas na pasta `Assets/`).
+**Contexto de uso atual:** Card Acessibilidade (em Destaque/Featured) na seção "Nossa Estrutura" (linha 341 do HTML).
 **Sugestões de uso no site:**
 - 🥇 **Uso principal recomendado:** Seção de Localização (ao lado do mapa) com a legenda destacando o diferencial de rampa com acessibilidade completa.
 - 🥈 **Uso alternativo 1:** Galeria de fotos do estabelecimento.
@@ -117,7 +117,7 @@
 ### reglicred-empréstimo+consignado-sao+cristovao (1) (4).webp
 
 **Descrição:** Foto em plano médio e ângulo diagonal mostrando as mesas de atendimento vazias e organizadas do escritório. Há duas mesas cinzas e brancas, computadores, teclado, impressora multifuncional Brother e impressora Epson. Ao fundo, a parede amarela exibe o letreiro "RC RégliCred" em relevo azul e, na parede ao lado, a placa "MAIS CORRESPONDENTE AUTORIZADO" do Banco do Brasil.
-**Contexto de uso atual:** Segunda imagem da galeria (linha 278 do HTML). *Nota: O HTML original exibe incorretamente o alt text desta foto como "Fachada RégliCred".*
+**Contexto de uso atual:** Card Localização na seção "Nossa Estrutura" (linha 369 do HTML).
 **Sugestões de uso no site:**
 - 🥇 **Uso principal recomendado:** Galeria de infraestrutura física e seção "Sobre a RégliCred".
 - ⚠️ **Evitar usar em:** Hero (muito fechada no escritório) ou como imagem de serviço individual.
@@ -129,7 +129,7 @@
 ### reglicred-empréstimo+consignado-sao+cristovao (1).mp4
 
 **Descrição:** Vídeo gravado na vertical pelo fundador da empresa, Sargento Régli, usando óculos de grau e camisa polo de uniforme (azul marinho e gola amarela). Ao fundo, destaca-se a parede amarela do escritório com parte do letreiro "Cred". O fundador se apresenta como Sargento Régli e explica que a RégliCred é focada em empréstimo consignado e educação/assessoria financeira para servidores públicos estaduais e federais do Rio de Janeiro.
-**Contexto de uso atual:** Não utilizado no HTML.
+**Contexto de uso atual:** Player de vídeo na seção "Nossa História" (linha 389 do HTML).
 **Sugestões de uso no site:**
 - 🥇 **Uso principal recomendado:** Seção "Nossa História / Quem Somos", abaixo ou ao lado do texto institucional, para humanizar a marca e dar voz ao proprietário.
 - 🥈 **Uso alternativo 1:** Seção Hero como link de vídeo explicativo de 1 minuto ("Assista à mensagem do fundador").
