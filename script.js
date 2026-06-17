@@ -557,23 +557,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById(videoId);
     if (!video) return;
     
-    const playIcon = video.parentElement.querySelector('.video-play-icon');
+    const container = video.parentElement;
+    const playIcon = container.querySelector('.video-play-icon');
     
     // Pausa qualquer outro vídeo (inclusive história) que esteja tocando
     document.querySelectorAll('.premium-grid-video, #historia-video').forEach(v => {
       if (v.id !== videoId && !v.paused) {
         v.pause();
-        const otherIcon = v.parentElement.querySelector('.video-play-icon');
+        const otherContainer = v.parentElement;
+        const otherIcon = otherContainer.querySelector('.video-play-icon');
         if (otherIcon) otherIcon.classList.remove('playing');
+        otherContainer.classList.remove('playing');
       }
     });
 
     if (video.paused) {
       video.play();
       if (playIcon) playIcon.classList.add('playing');
+      container.classList.add('playing');
     } else {
       video.pause();
       if (playIcon) playIcon.classList.remove('playing');
+      container.classList.remove('playing');
     }
   };
 
@@ -588,14 +593,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (audioBtn) {
       if (video.muted) {
-        audioBtn.innerHTML = '<span class="btn-icon">🔇</span>';
+        audioBtn.classList.remove('sound-active');
       } else {
-        audioBtn.innerHTML = '<span class="btn-icon">🔊</span>';
+        audioBtn.classList.add('sound-active');
         // Se estava pausado ao tirar o mudo, dá play
         if (video.paused) {
           video.play();
-          const playIcon = video.parentElement.querySelector('.video-play-icon');
+          const container = video.parentElement;
+          const playIcon = container.querySelector('.video-play-icon');
           if (playIcon) playIcon.classList.add('playing');
+          container.classList.add('playing');
         }
       }
     }
