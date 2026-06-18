@@ -338,23 +338,267 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  const marqueeContent = document.getElementById('depo-marquee-content');
+  const stackContainer = document.getElementById('depo-stack-container');
+  const counterEl = document.getElementById('depo-stack-counter');
+  const btnPrev = document.getElementById('btn-prev-depo');
+  const btnNext = document.getElementById('btn-next-depo');
   
   function createDepoCard(depo) {
+    const inicial = depo.nome.charAt(0).toUpperCase();
     return `
-      <div class="depo-card">
+      <div class="depo-stack-card">
+        <div class="depo-card-header">
+          <div class="depo-user">
+            <div class="depo-avatar">${inicial}</div>
+            <div class="depo-meta">
+              <span class="depo-author">${depo.nome}</span>
+              <span class="depo-verified">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="verified-icon"><polyline points="20 6 9 17 4 12"/></svg>
+                Cliente Verificado
+              </span>
+            </div>
+          </div>
+          <span class="depo-time">${depo.tempo}</span>
+        </div>
         <div class="depo-stars">★★★★★</div>
         <p class="depo-text">"${depo.texto}"</p>
-        <div class="depo-author">${depo.nome}</div>
-        <div class="depo-time">${depo.tempo}</div>
       </div>
     `;
   }
 
-  if (marqueeContent) {
-    // Create 2 sets for seamless loop
-    const cardsHTML = depoimentos.map(createDepoCard).join('');
-    marqueeContent.innerHTML = cardsHTML + cardsHTML;
+  if (stackContainer) {
+    stackContainer.innerHTML = depoimentos.map(createDepoCard).join('');
+    const cards = stackContainer.querySelectorAll('.depo-stack-card');
+    let currentIndex = 0;
+    let isAnimating = false;
+    
+    function updateStack() {
+      cards.forEach((card, index) => {
+        card.classList.remove('active', 'next', 'prev-stack', 'hidden-stack');
+        
+        // Calcula a posição relativa da carta na pilha de forma circular
+        const pos = (index - currentIndex + cards.length) % cards.length;
+        
+        if (pos === 0) {
+          card.classList.add('active');
+          card.style.transform = 'translate3d(0, 0, 0) scale(1) rotate(0deg)';
+          card.style.opacity = '1';
+          card.style.zIndex = '3';
+          card.style.pointerEvents = 'auto';
+          card.style.visibility = 'visible';
+        } else if (pos === 1) {
+          card.classList.add('next');
+          card.style.transform = 'translate3d(0, 16px, 0) scale(0.95) rotate(-1.5deg)';
+          card.style.opacity = '0.85';
+          card.style.zIndex = '2';
+          card.style.pointerEvents = 'none';
+          card.style.visibility = 'visible';
+        } else if (pos === 2) {
+          card.classList.add('prev-stack'); // Terceiro card na profundidade da pilha
+          card.style.transform = 'translate3d(0, 32px, 0) scale(0.90) rotate(1.5deg)';
+          card.style.opacity = '0.45';
+          card.style.zIndex = '1';
+          card.style.pointerEvents = 'none';
+          card.style.visibility = 'visible';
+        } else {
+          card.classList.add('hidden-stack');
+          card.style.transform = 'translate3d(0, 32px, 0) scale(0.90) rotate(1.5deg)';
+          card.style.opacity = '0';
+          card.style.zIndex = '0';
+          card.style.pointerEvents = 'none';
+          card.style.visibility = 'hidden';
+        }
+      });
+      
+      // Atualizar contador textual
+      if (counterEl) {
+        const activeNum = (currentIndex + 1).toString().padStart(2, '0');
+        const totalNum = cards.length.toString().padStart(2, '0');
+        counterEl.innerText = `${activeNum} / ${totalNum}`;
+      }
+    }
+
+    // Inicializar visual da pilha
+    updateStack();
+
+    // Lógica premium de Swipe e Clique Físico no Card Ativo (Estilo Tinder/Stories)
+    let startX = 0;
+    let startY = 0;
+    let dragDeltaX = 0;
+    let dragDeltaY = 0;
+    let isDragging = false;
+    let activeDragCard = null;
+
+    function handleDragStart(e) {
+      if (isAnimating) return;
+      
+      // Apenas interage se for o card ativo
+      const card = e.currentTarget;
+      if (!card.classList.contains('active')) return;
+
+      isDragging = true;
+      activeDragCard = card;
+      dragDeltaX = 0;
+      dragDeltaY = 0;
+      
+      const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+      startX = clientX;
+      startY = clientY;
+      
+      card.style.transition = 'none';
+      
+      if (e.type.startsWith('touch')) {
+        document.addEventListener('touchmove', handleDragMove, { passive: false });
+        document.addEventListener('touchend', handleDragEnd);
+      } else {
+        document.addEventListener('mousemove', handleDragMove);
+        document.addEventListener('mouseup', handleDragEnd);
+      }
+    }
+
+    function handleDragMove(e) {
+      if (!isDragging || !activeDragCard) return;
+      
+      const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+      
+      dragDeltaX = clientX - startX;
+      dragDeltaY = clientY - startY;
+      
+      // Prevenir comportamento padrão de rolagem de página ao arrastar no mobile
+      if (e.type.startsWith('touch') && Math.abs(dragDeltaX) > Math.abs(dragDeltaY)) {
+        if (e.cancelable) e.preventDefault();
+      }
+      
+      // Rotação física sutil baseada no movimento
+      const rotate = dragDeltaX * 0.04;
+      activeDragCard.style.transform = `translate3d(${dragDeltaX}px, ${dragDeltaY}px, 0) scale(1) rotate(${rotate}deg)`;
+      
+      // Diminuir ligeiramente a opacidade conforme afasta do centro
+      const percent = Math.min(Math.abs(dragDeltaX) / 200, 1);
+      activeDragCard.style.opacity = (1 - percent * 0.25).toString();
+    }
+
+    function handleDragEnd(e) {
+      if (!isDragging || !activeDragCard) return;
+      isDragging = false;
+      
+      const card = activeDragCard;
+      activeDragCard = null;
+      
+      card.style.transition = '';
+      
+      // Remover os listeners globais temporários
+      document.removeEventListener('mousemove', handleDragMove);
+      document.removeEventListener('mouseup', handleDragEnd);
+      document.removeEventListener('touchmove', handleDragMove);
+      document.removeEventListener('touchend', handleDragEnd);
+      
+      const swipeThreshold = 80; // limite de pixels para acionar o descarte
+      
+      if (Math.abs(dragDeltaX) > swipeThreshold) {
+        // Descarte bem-sucedido (Swipe)
+        isAnimating = true;
+        const direction = dragDeltaX > 0 ? 1 : -1;
+        
+        card.classList.add('swipe-out');
+        card.style.transform = `translate3d(${direction * 120}%, ${dragDeltaY}px, 0) scale(0.95) rotate(${direction * 12}deg)`;
+        card.style.opacity = '0';
+        
+        currentIndex = (currentIndex + 1) % cards.length;
+        
+        setTimeout(() => {
+          updateStack();
+        }, 80);
+        
+        setTimeout(() => {
+          card.classList.remove('swipe-out');
+          isAnimating = false;
+        }, 450);
+      } else {
+        // Restaurar o card para a posição inicial se não atingir o limite
+        card.style.transform = 'translate3d(0, 0, 0) scale(1) rotate(0deg)';
+        card.style.opacity = '1';
+        
+        // Se a distância for muito pequena, interpretar como um clique comum
+        if (Math.abs(dragDeltaX) < 6 && Math.abs(dragDeltaY) < 6) {
+          // Evita clique se clicou em botões ou links internos do card
+          if (e.target.closest('a') || e.target.closest('button')) return;
+          
+          isAnimating = true;
+          card.classList.add('swipe-out');
+          card.style.transform = 'translate3d(120%, -30px, 0) scale(0.95) rotate(12deg)';
+          card.style.opacity = '0';
+          
+          currentIndex = (currentIndex + 1) % cards.length;
+          
+          setTimeout(() => {
+            updateStack();
+          }, 80);
+          
+          setTimeout(() => {
+            card.classList.remove('swipe-out');
+            isAnimating = false;
+          }, 450);
+        }
+      }
+    }
+
+    // Associar os eventos de drag/toque a todos os cards
+    cards.forEach((card) => {
+      card.addEventListener('mousedown', handleDragStart);
+      card.addEventListener('touchstart', handleDragStart, { passive: true });
+    });
+
+    // Eventos de clique nas setas de navegação
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        const activeCard = cards[currentIndex];
+        activeCard.classList.add('swipe-out');
+        activeCard.style.transform = 'translate3d(120%, -30px, 0) scale(0.95) rotate(12deg)';
+        activeCard.style.opacity = '0';
+        
+        currentIndex = (currentIndex + 1) % cards.length;
+        
+        setTimeout(() => {
+          updateStack();
+        }, 80);
+        
+        setTimeout(() => {
+          activeCard.classList.remove('swipe-out');
+          isAnimating = false;
+        }, 450);
+      });
+    }
+    
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        const newActiveCard = cards[currentIndex];
+        
+        newActiveCard.style.transition = 'none';
+        newActiveCard.style.transform = 'translate3d(-120%, -30px, 0) scale(0.95) rotate(-12deg)';
+        newActiveCard.style.opacity = '0';
+        newActiveCard.style.zIndex = '4';
+        newActiveCard.style.visibility = 'visible';
+        
+        newActiveCard.offsetHeight; // Forçar o reflow
+        
+        newActiveCard.style.transition = '';
+        updateStack();
+        
+        setTimeout(() => {
+          isAnimating = false;
+        }, 450);
+      });
+    }
   }
 
   // ===== NAVBAR LINK ACTIVE STATE =====
@@ -379,17 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { passive: true });
 
-  // ===== PAUSE MARQUEE ON HOVER =====
-  document.querySelectorAll('.depoimentos-marquee').forEach(marquee => {
-    marquee.addEventListener('mouseenter', () => {
-      const content = marquee.querySelector('.depo-marquee-content');
-      if (content) content.style.animationPlayState = 'paused';
-    });
-    marquee.addEventListener('mouseleave', () => {
-      const content = marquee.querySelector('.depo-marquee-content');
-      if (content) content.style.animationPlayState = 'running';
-    });
-  });
+  // O hover do marquee foi removido na Opção A (Bento Grid estático)
 
   // ===== SCROLL TO TOP ON PAGE LOAD =====
   window.scrollTo(0, 0);
@@ -572,6 +806,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (video.paused) {
+      // Desmuta o vídeo ao dar play
+      video.muted = false;
+      const audioBtn = container.querySelector('.grid-audio-btn');
+      if (audioBtn) {
+        audioBtn.classList.add('sound-active');
+      }
+
       video.play();
       if (playIcon) playIcon.classList.add('playing');
       container.classList.add('playing');
@@ -714,6 +955,33 @@ document.addEventListener('DOMContentLoaded', () => {
       modalVideo.msRequestFullscreen();
     }
   };
+
+  // ===== PARAR VÍDEOS AO SAIR DA SEÇÃO =====
+  const videosSection = document.getElementById('videos-premium');
+  if (videosSection) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          const sectionVideos = entry.target.querySelectorAll('video');
+          sectionVideos.forEach(video => {
+            if (!video.paused) {
+              video.pause();
+              const container = video.parentElement;
+              if (container) {
+                container.classList.remove('playing');
+                const playIcon = container.querySelector('.video-play-icon');
+                if (playIcon) playIcon.classList.remove('playing');
+              }
+            }
+            video.currentTime = 0;
+          });
+        }
+      });
+    }, {
+      threshold: 0
+    });
+    videoObserver.observe(videosSection);
+  }
 
   // ===== CALCULADORA DE EMPRÉSTIMO =====
   window.setCalcTab = function(btn) {

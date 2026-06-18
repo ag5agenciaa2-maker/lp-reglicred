@@ -33,12 +33,10 @@
       </button>
       <ul class="nav-menu" id="nav-menu">
         <li><a href="#hero" class="nav-link">Início</a></li>
-        <li><a href="#dor-solucao" class="nav-link">Sobre</a></li>
-        <li><a href="#servicos" class="nav-link">Serviços</a></li>
-        <li><a href="#como-funciona" class="nav-link">Como Funciona</a></li>
-        <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
-        <li><a href="#sobre" class="nav-link">Nossa História</a></li>
-        <li><a href="#localizacao" class="nav-link">Onde Estamos</a></li>
+        <li><a href="#servicos" class="nav-link">Serviço</a></li>
+        <li><a href="#depoimentos" class="nav-link">Depoimento</a></li>
+        <li><a href="#sobre" class="nav-link">Sobre</a></li>
+        <li><a href="#cta" class="nav-link">Contato</a></li>
         <li><a href="#cta" class="nav-cta">Simular Empréstimo</a></li>
       </ul>
     </div>
@@ -53,36 +51,17 @@
           <span>5,0 no Google · 255 avaliações · ~20 anos no mercado</span>
         </div>
         <h1 class="hero-title">Empréstimo Consignado com a <span class="gold">melhor taxa</span> do mercado</h1>
-        <p class="hero-subtitle">Criada por servidor para servidor. Assessoria personalizada, estrutura própria e as menores taxas. Atendimento humano do início ao fim.</p>
+        <p class="hero-subtitle">De servidor para servidor. Assessoria personalizada, estrutura própria e as menores taxas. Atendimento humano do início ao fim.</p>
         <div class="hero-ctas">
-          <a href="#cta" class="hero-cta-btn">Quero Simular Agora</a>
+          <a href="#simulador" class="hero-cta-btn">Quero Simular Agora</a>
           <a href="https://wa.me/5521980092063?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20uma%20informa%C3%A7%C3%A3o." target="_blank" rel="noopener" class="hero-cta-btn btn-secondary">Falar no WhatsApp</a>
         </div>
       </div>
       <div class="hero-visual">
         <div class="hero-image-wrapper">
-          <img src="Assets/reglicred-fachada-loja-sao-cristovao.webp" alt="Fachada da loja RégliCred Empréstimo Consignado em São Cristóvão, RJ" class="hero-image" loading="eager">
-          <div class="hero-float-card card-1">
-            <span class="float-icon">✓</span>
-            <div>
-              <strong>Aprovação Rápida</strong>
-              <small>Em até 24h</small>
-            </div>
-          </div>
-          <div class="hero-float-card card-2">
-            <span class="float-icon">★</span>
-            <div>
-              <strong>Nota 5,0 Google</strong>
-              <small>255 avaliações</small>
-            </div>
-          </div>
-          <div class="hero-float-card card-3">
-            <span class="float-icon">🏠</span>
-            <div>
-              <strong>Imóvel Próprio</strong>
-              <small>Mais segurança</small>
-            </div>
-          </div>
+          <video class="hero-video" autoplay loop muted playsinline poster="Assets/reglicred-fachada-loja-sao-cristovao.webp">
+            <source src="Assets/reglicred-video-tour-loja-atendimento.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
   </section>
@@ -132,6 +111,9 @@
       
     </div>
   </section>
+
+  <!-- Degradê suave entre Problema vs Solução e Nossos Serviços -->
+  <div class="gradient-bridge gradient-bridge--dor-to-servicos" aria-hidden="true"></div>
 
   <!-- Serviços Premium — Spotlight Grid -->
   <section class="servicos" id="servicos">
@@ -263,70 +245,100 @@
   <!-- Como Funciona Premium -->
   <section class="como-funciona" id="como-funciona">
     <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Processo Simples</span>
-        <h2 class="section-title">Como funciona o seu <span class="gold">empréstimo consignado</span></h2>
-      </div>
-      <div class="process-timeline">
-        <div class="process-line">
-          <div class="process-line-fill" id="process-line-fill"></div>
-          <div class="process-dot process-dot--1"></div>
-          <div class="process-dot process-dot--2"></div>
-          <div class="process-dot process-dot--3"></div>
+      <div class="cf-header reveal">
+        <div class="cf-header-left">
+          <span class="section-label">Processo Simples</span>
+          <h2 class="section-title">Como funciona o seu <span class="gold">empréstimo consignado</span></h2>
         </div>
-        <div class="process-steps">
-          <div class="process-step reveal" data-step="1">
-            <div class="process-step-content">
-              <div class="process-step-badge">
-                <span class="process-step-num">01</span>
-                <div class="process-step-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                </div>
-              </div>
-              <h3>Fale Conosco</h3>
-              <p>Entre em contato pelo WhatsApp, telefone ou visite nossa loja. Nossa equipe está pronta para te atender com atenção e clareza.</p>
-              <div class="process-step-tags">
-                <span class="process-tag">WhatsApp</span>
-                <span class="process-tag">Loja Física</span>
-              </div>
-            </div>
+        <p class="cf-header-desc">Do primeiro contato ao dinheiro na conta — sem filas, sem burocracia, com acompanhamento humano em cada etapa.</p>
+      </div>
+
+      <!-- Grade Horizontal de Passos com Setas -->
+      <div class="cf-steps-row">
+
+        <!-- Passo 1 -->
+        <div class="cf-step reveal" data-delay="0">
+          <div class="cf-step-number">01</div>
+          <div class="cf-step-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
-          <div class="process-step reveal" data-step="2">
-            <div class="process-step-content">
-              <div class="process-step-badge">
-                <span class="process-step-num">02</span>
-                <div class="process-step-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                </div>
-              </div>
-              <h3>Análise e Melhor Taxa</h3>
-              <p>Fazemos uma análise personalizada do seu perfil e buscamos a melhor proposta entre nossos parceiros bancários.</p>
-              <div class="process-step-tags">
-                <span class="process-tag">Análise Personalizada</span>
-                <span class="process-tag">Melhor Taxa</span>
-              </div>
-            </div>
+          <div class="cf-step-body">
+            <h3>Fale Conosco</h3>
+            <p>Entre em contato pelo WhatsApp, telefone ou visite nossa loja. Atendimento humano, atenção total.</p>
           </div>
-          <div class="process-step reveal" data-step="3">
-            <div class="process-step-content">
-              <div class="process-step-badge">
-                <span class="process-step-num">03</span>
-                <div class="process-step-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                </div>
-              </div>
-              <h3>Crédito Liberado</h3>
-              <p>Após aprovação, o dinheiro cai na sua conta. Todo o processo acompanhado pela nossa equipe do início ao fim.</p>
-              <div class="process-step-tags">
-                <span class="process-tag">Até 24h</span>
-                <span class="process-tag">Acompanhamento Total</span>
-              </div>
-            </div>
+          <div class="cf-step-tags">
+            <span class="cf-tag">WhatsApp</span>
+            <span class="cf-tag">Loja Física</span>
           </div>
         </div>
-      </div>
-    </div>
+
+        <!-- Seta 1→2 -->
+        <div class="cf-arrow" aria-hidden="true">
+          <svg class="cf-arrow-svg" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="cf-arrow-path" d="M4 20 Q 30 20 60 20 Q 90 20 116 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 5"/>
+            <path d="M104 10 L116 20 L104 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="4" cy="20" r="3" fill="currentColor"/>
+          </svg>
+          <span class="cf-arrow-label">Análise em até 1h</span>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="cf-step reveal" data-delay="150">
+          <div class="cf-step-number">02</div>
+          <div class="cf-step-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <div class="cf-step-body">
+            <h3>Análise e Melhor Taxa</h3>
+            <p>Fazemos análise personalizada do seu perfil e buscamos a melhor proposta entre nossos parceiros.</p>
+          </div>
+          <div class="cf-step-tags">
+            <span class="cf-tag">Personalizado</span>
+            <span class="cf-tag">Melhor Taxa</span>
+          </div>
+        </div>
+
+        <!-- Seta 2→3 -->
+        <div class="cf-arrow" aria-hidden="true">
+          <svg class="cf-arrow-svg" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="cf-arrow-path" d="M4 20 Q 30 20 60 20 Q 90 20 116 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6 5"/>
+            <path d="M104 10 L116 20 L104 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="4" cy="20" r="3" fill="currentColor"/>
+          </svg>
+          <span class="cf-arrow-label">Aprovação rápida</span>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="cf-step reveal" data-delay="300">
+          <div class="cf-step-number">03</div>
+          <div class="cf-step-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div class="cf-step-body">
+            <h3>Crédito Liberado</h3>
+            <p>Após aprovação, o dinheiro cai na sua conta. Acompanhamento total da nossa equipe do início ao fim.</p>
+          </div>
+          <div class="cf-step-tags">
+            <span class="cf-tag">Até 24h</span>
+            <span class="cf-tag">Acompanhamento</span>
+          </div>
+        </div>
+
+      </div><!-- fim .cf-steps-row -->
+    </div><!-- fim .container -->
   </section>
+
+  <!-- Separador entre Processo e Simulador -->
+  <div class="section-divider" aria-hidden="true">
+    <div class="divider-line"></div>
+    <div class="divider-ornament">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 4 L28 16 L16 28 L4 16 Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+        <circle cx="16" cy="16" r="3.5" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="divider-line"></div>
+  </div>
 
   <!-- Calculadora de Empréstimo Consignado -->
   <section class="calculadora-section" id="simulador">
@@ -472,6 +484,13 @@
   <section class="sobre" id="sobre">
     <div class="container">
       <div class="sobre-grid">
+        <!-- Titulo / Cabeçalho -->
+        <div class="sobre-header-col reveal" data-delay="150">
+          <span class="section-label">Nossa História</span>
+          <h2>De servidor a <span class="gold">referência</span> em crédito consignado</h2>
+        </div>
+
+        <!-- Vídeo da História -->
         <div class="sobre-media reveal" data-delay="0">
           <div class="video-container" id="main-video-container">
             <video id="historia-video" loop muted playsinline>
@@ -514,16 +533,13 @@
           </div>
         </div>
 
-        <div class="sobre-content">
-          <div class="sobre-text reveal" data-delay="150">
-            <span class="section-label">Nossa História</span>
-            <h2>De servidor a <span class="gold">referência</span> em crédito consignado</h2>
-            <p class="lead">O Soldado Régli chegou ao 39º BPM em Belford Roxo em janeiro de 2006. Vivenciando de perto as dificuldades financeiras dos seus colegas de farda, percebeu a falta de assessoria clara e justa por parte das instituições financeiras tradicionais.</p>
-            <p>Decidido a mudar esse cenário, especializou-se em operações de crédito, comportamento financeiro e planejamento familiar. O que começou com uma ajuda voluntária aos companheiros de batalhão cresceu e, em 2011, tomou forma oficial como a <strong>RÉGLI CRED</strong>.</p>
-            <p>Hoje, prestes a completar duas décadas de atuação, nossa missão permanece intacta: oferecer crédito seguro, transparente e personalizado, com a menor taxa do mercado e o respeito que você merece.</p>
-          </div>
+        <!-- Detalhes do Texto e Estatísticas -->
+        <div class="sobre-details reveal" data-delay="150">
+          <p class="lead">O Soldado Régli chegou ao 39º BPM em Belford Roxo em janeiro de 2006. Vivenciando de perto as dificuldades financeiras dos seus colegas de farda, percebeu a falta de assessoria clara e justa por parte das instituições financeiras tradicionais.</p>
+          <p>Decidido a mudar esse cenário, especializou-se em operações de crédito, comportamento financeiro e planejamento familiar. O que começou com uma ajuda voluntária aos companheiros de batalhão cresceu e, em 2011, tomou forma oficial como a <strong>RÉGLI CRED</strong>.</p>
+          <p>Hoje, prestes a completar duas décadas de atuação, nossa missão permanece intacta: oferecer crédito seguro, transparente e personalizado, com a menor taxa do mercado e o respeito que você merece.</p>
           
-          <div class="sobre-stats reveal" data-delay="300">
+          <div class="sobre-stats">
             <div class="stat-item">
               <div class="counter-number" data-target="20">0</div>
               <div class="stat-label">Anos de atuação no mercado financeiro</div>
@@ -538,6 +554,9 @@
       </div>
     </div>
   </section>
+
+  <!-- Degradê suave entre Nossa História e Educação e Segurança -->
+  <div class="gradient-bridge gradient-bridge--sobre-to-videos" aria-hidden="true"></div>
 
   <!-- Modal de Vídeo Premium -->
   <div id="video-premium-modal" class="video-modal">
@@ -576,7 +595,7 @@
         <!-- Card Vídeo 1: Segurança (Alerta Golpe) -->
         <div class="video-card-premium reveal" data-delay="0">
           <div class="video-container" id="video-card-container-1">
-            <video class="premium-grid-video" loop muted playsinline poster="Assets/logo-reglicred-desktop.webp" id="video-security">
+            <video class="premium-grid-video" loop muted playsinline id="video-security">
               <source src="Assets/reglicred-video-sargento-regli-alerta-golpe-pix.mp4" type="video/mp4">
             </video>
             <div class="video-overlay" onclick="toggleGridVideoPlay('video-security')">
@@ -611,7 +630,7 @@
         <!-- Card Vídeo 2: Financiamento vs Consignado -->
         <div class="video-card-premium reveal" data-delay="150">
           <div class="video-container" id="video-card-container-2">
-            <video class="premium-grid-video" loop muted playsinline poster="Assets/reglicred-sala-atendimento-consignado-1.webp" id="video-dica">
+            <video class="premium-grid-video" loop muted playsinline id="video-dica">
               <source src="Assets/reglicred-video-sargento-regli-consignado-x-financiamento.mp4" type="video/mp4">
             </video>
             <div class="video-overlay" onclick="toggleGridVideoPlay('video-dica')">
@@ -642,65 +661,47 @@
             </div>
           </div>
         </div>
-
-        <!-- Card Vídeo 3: Tour pela Loja -->
-        <div class="video-card-premium reveal" data-delay="300">
-          <div class="video-container" id="video-card-container-3">
-            <video class="premium-grid-video" loop muted playsinline poster="Assets/reglicred-escritorio-mesas-atendimento.webp" id="video-tour">
-              <source src="Assets/reglicred-video-tour-loja-atendimento.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay" onclick="toggleGridVideoPlay('video-tour')">
-              <div class="video-play-icon">
-                <span class="play-symbol">▶</span>
-                <span class="pause-symbol">❚❚</span>
-              </div>
-            </div>
-            <div class="video-badge">
-              <span class="pulse-dot"></span>
-              Tour Virtual
-            </div>
-            <div class="video-top-controls">
-              <button class="video-icon-btn grid-audio-btn" onclick="toggleGridVideoMute(event, 'video-tour')" title="Alternar Som" aria-label="Alternar Som">
-                <svg class="btn-icon icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                <svg class="btn-icon icon-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
-              </button>
-              <button class="video-icon-btn" onclick="openPremiumModalDynamic(event, 'video-tour')" title="Expandir" aria-label="Expandir Vídeo">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
-              </button>
-            </div>
-            <div class="video-caption-premium">
-              <div class="video-caption-line"></div>
-              <div class="video-caption-content">
-                <span class="video-caption-name">Nossa Estrutura em São Cristóvão</span>
-                <span class="video-caption-title">Tour Virtual</span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- Depoimentos -->
   <section class="depoimentos" id="depoimentos">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Depoimentos</span>
-        <h2 class="section-title">O que nossos <span class="gold">clientes dizem</span></h2>
-      </div>
-      <div class="google-badge reveal">
-        <div class="google-stars">★★★★★</div>
-        <div class="google-info">
-          <strong>5,0</strong>
-          <span>255 avaliações no Google</span>
-        </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="google-logo">
-      </div>
+    <div class="depoimentos-bg">
+      <div class="depoimentos-orb"></div>
     </div>
-    <div class="depoimentos-marquee-wrapper">
-      <div class="depoimentos-marquee" id="depo-marquee">
-        <div class="depo-marquee-content" id="depo-marquee-content">
-          <!-- Depoimentos serão inseridos via JS -->
+    <div class="container">
+      <div class="depoimentos-layout">
+        <!-- Coluna Esquerda: Reputação Google -->
+        <div class="depoimentos-info reveal">
+          <span class="section-label">Depoimentos</span>
+          <h2 class="section-title">A voz de quem confia na <span class="gold">RégliCred</span></h2>
+          <p class="depoimentos-desc">Comprovado por quem já garantiu as melhores condições de crédito. Nosso compromisso com a clareza e segurança reflete-se em cada feedback.</p>
+          
+          <div class="google-rating-card">
+            <a href="https://www.google.com/search?q=R%C3%A9gliCred+Empr%C3%A9stimo+Consignado" target="_blank" rel="noopener noreferrer" class="gr-link">
+              <span>Ver outras avaliações</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Pilha de Depoimentos 3D -->
+        <div class="depoimentos-stack reveal" data-delay="150">
+          <div class="depo-stack-container" id="depo-stack-container">
+            <!-- Os cards dos depoimentos serão injetados aqui via JS -->
+          </div>
+          
+          <!-- Controles Minimalistas da Pilha -->
+          <div class="depo-stack-controls">
+            <button class="stack-control-btn btn-prev" id="btn-prev-depo" aria-label="Depoimento Anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            </button>
+            <span class="stack-counter" id="depo-stack-counter">01 / 12</span>
+            <button class="stack-control-btn btn-next" id="btn-next-depo" aria-label="Próximo Depoimento">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -872,8 +873,14 @@
 
   <!-- CTA Premium — Simulação com Background -->
   <section class="cta" id="cta">
+    <div class="cta-bg-img"></div>
+    <div class="cta-bg-overlay"></div>
     <div class="cta-bg"></div>
     <div class="cta-overlay"></div>
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+    <div class="cta-orb cta-orb-3"></div>
+    <div class="cta-grid-pattern"></div>
     <div class="container">
       <div class="cta-grid">
         <div class="cta-text reveal">
@@ -911,6 +918,7 @@
           </ul>
         </div>
         <div class="cta-form-wrapper reveal" data-delay="150">
+          <div class="cta-form-glow"></div>
           <form class="cta-form" id="cta-form">
             <div class="cta-form-header">
               <span class="cta-form-tag">Formulário</span>
@@ -941,10 +949,6 @@
                 <option value="Compra de Dívida">Compra de Dívida</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="cta-mensagem">Conte-nos sua situação (opcional)</label>
-              <textarea name="mensagem" id="cta-mensagem" rows="3" placeholder="Descreva sua necessidade para um atendimento mais personalizado" class="form-input form-textarea"></textarea>
-            </div>
             <button type="submit" class="form-btn form-btn-lg">
               <span>Enviar Solicitação</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -965,7 +969,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="#hero" class="footer-logo">
-            <img src="Assets/logo-reglicred-desktop.webp" alt="RégliCred" class="logo-img">
+            <img src="Assets/logo-reglicred-desktop.webp" alt="RégliCred" class="footer-logo-img">
           </a>
           <p>Empréstimo Consignado e Assessoria Financeira. Criada por servidor, para servidor. ~20 anos de mercado.</p>
           <a href="https://instagram.com/regli_cred" target="_blank" rel="noopener" class="footer-instagram" aria-label="Instagram RégliCred">
@@ -1107,12 +1111,10 @@
     <nav class="drawer-nav">
       <ul class="drawer-menu">
         <li><a href="#hero" class="drawer-link">Início</a></li>
-        <li><a href="#dor-solucao" class="drawer-link">Sobre</a></li>
-        <li><a href="#servicos" class="drawer-link">Serviços</a></li>
-        <li><a href="#como-funciona" class="drawer-link">Como Funciona</a></li>
-        <li><a href="#depoimentos" class="drawer-link">Depoimentos</a></li>
-        <li><a href="#sobre" class="drawer-link">Nossa História</a></li>
-        <li><a href="#localizacao" class="drawer-link">Onde Estamos</a></li>
+        <li><a href="#servicos" class="drawer-link">Serviço</a></li>
+        <li><a href="#depoimentos" class="drawer-link">Depoimento</a></li>
+        <li><a href="#sobre" class="drawer-link">Sobre</a></li>
+        <li><a href="#cta" class="drawer-link">Contato</a></li>
       </ul>
     </nav>
     <div class="drawer-footer">
