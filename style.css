@@ -2300,11 +2300,6 @@ ul { list-style: none; }
   padding-bottom: 12px;
 }
 
-.video-modal-player-wrapper video::-webkit-media-controls-play-button {
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(10deg);
-  cursor: pointer;
-}
-
 .video-modal-player-wrapper video::-webkit-media-controls-timeline {
   cursor: pointer;
   padding: 0 8px;
@@ -2319,11 +2314,6 @@ ul { list-style: none; }
 }
 
 .video-modal-player-wrapper video::-webkit-media-controls-volume-slider {
-  cursor: pointer;
-}
-
-.video-modal-player-wrapper video::-webkit-media-controls-fullscreen-button {
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(10deg);
   cursor: pointer;
 }
 
