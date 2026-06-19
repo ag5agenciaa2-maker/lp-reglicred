@@ -3,6 +3,7 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  try {
 
   // ===== LOADING SCREEN =====
   const loadingScreen = document.getElementById('loading-screen');
@@ -732,61 +733,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===== VIDEO HISTORY, GRID & PREMIUM MODAL FUNCTIONS =====
-  const mainVideo = document.getElementById('historia-video');
   const modalVideo = document.getElementById('modal-video');
   const premiumModal = document.getElementById('video-premium-modal');
-  const btnPageAudio = document.getElementById('btn-page-audio');
-  const btnModalAudio = document.getElementById('modal-btn-audio');
-  const mainPlayIcon = document.querySelector('#main-video-container .video-play-icon');
   
   let activeMainVideoElement = null; // Guarda qual vídeo da página foi expandido no modal
 
-  // 1. Play / Pause do vídeo da página de história
-  window.toggleMainVideoPlay = function() {
-    if (!mainVideo) return;
-    const mainContainer = document.getElementById('main-video-container');
-    
-    // Pausa outros vídeos tocando no grid
-    document.querySelectorAll('.premium-grid-video').forEach(v => {
-      if (!v.paused) {
-        v.pause();
-        const otherIcon = v.parentElement.querySelector('.video-play-icon');
-        if (otherIcon) otherIcon.classList.remove('playing');
-      }
-    });
-
-    if (mainVideo.paused) {
-      mainVideo.play();
-      // Ativa o som automaticamente ao dar play
-      mainVideo.muted = false;
-      if (btnPageAudio) btnPageAudio.classList.add('sound-active');
-      if (mainPlayIcon) mainPlayIcon.classList.add('playing');
-      if (mainContainer) mainContainer.classList.add('playing');
-    } else {
-      mainVideo.pause();
-      if (mainPlayIcon) mainPlayIcon.classList.remove('playing');
-      if (mainContainer) mainContainer.classList.remove('playing');
-    }
-  };
-
-  // 2. Mute / Unmute do vídeo da página de história
-  window.toggleMainVideoMute = function(e) {
-    if (e) e.stopPropagation();
-    if (!mainVideo || !btnPageAudio) return;
-    mainVideo.muted = !mainVideo.muted;
-    if (mainVideo.muted) {
-      btnPageAudio.classList.remove('sound-active');
-    } else {
-      btnPageAudio.classList.add('sound-active');
-      // Se estava pausado ao tirar o mudo, dá play
-      if (mainVideo.paused) {
-        mainVideo.play();
-        if (mainPlayIcon) mainPlayIcon.classList.add('playing');
-      }
-    }
-  };
-
-  // 3. Play / Pause genérico para os vídeos do grid premium
+  // 1. Play / Pause genérico para todos os vídeos (grid + história)
   window.toggleGridVideoPlay = function(videoId) {
     const video = document.getElementById(videoId);
     if (!video) return;
@@ -794,8 +746,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = video.parentElement;
     const playIcon = container.querySelector('.video-play-icon');
     
-    // Pausa qualquer outro vídeo (inclusive história) que esteja tocando
-    document.querySelectorAll('.premium-grid-video, #historia-video').forEach(v => {
+    // Pausa qualquer outro vídeo que esteja tocando
+    document.querySelectorAll('.premium-grid-video').forEach(v => {
       if (v.id !== videoId && !v.paused) {
         v.pause();
         const otherContainer = v.parentElement;
@@ -823,7 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 4. Mute / Unmute genérico para os vídeos do grid premium
+  // 2. Mute / Unmute genérico para todos os vídeos
   window.toggleGridVideoMute = function(e, videoId) {
     if (e) e.stopPropagation();
     const video = document.getElementById(videoId);
@@ -849,6 +801,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // 4.5. Barra de Progresso dos Vídeos (todos os vídeos premium)
+  (function initVideoProgressBars() {
+    const allVideos = document.querySelectorAll('.premium-grid-video');
+    
+    allVideos.forEach(video => {
+      const progressBar = video.parentElement.querySelector('.video-progress-bar');
+      const progressFill = progressBar ? progressBar.querySelector('.video-progress-fill') : null;
+      
+      if (!progressBar || !progressFill) return;
+      
+      // Atualiza a barra conforme o vídeo avança
+      video.addEventListener('timeupdate', () => {
+        if (video.duration) {
+          const percent = (video.currentTime / video.duration) * 100;
+          progressFill.style.width = percent + '%';
+        }
+      });
+      
+      // Reseta a barra quando o vídeo termina/loopa
+      video.addEventListener('ended', () => {
+        progressFill.style.width = '0%';
+      });
+      
+      // Permite clicar na barra para pular para uma posição
+      progressBar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (video.duration) {
+          const rect = progressBar.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const percent = clickX / rect.width;
+          video.currentTime = percent * video.duration;
+          
+          // Se estava pausado, dá play
+          if (video.paused) {
+            toggleGridVideoPlay(video.id);
+          }
+        }
+      });
+    });
+  })();
+
   // 5. Abrir Modal Premium com Vídeo Dinâmico (serve para história ou grid)
   window.openPremiumModalDynamic = function(e, videoId) {
     if (e) e.stopPropagation();
@@ -867,15 +860,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sincroniza currentTime e volume/muted
     modalVideo.currentTime = sourceVideo.currentTime;
     modalVideo.muted = sourceVideo.muted;
-    
-    // Atualiza botão de áudio no modal
-    if (btnModalAudio) {
-      if (modalVideo.muted) {
-        btnModalAudio.innerHTML = '<span class="modal-control-icon">🔇</span> Ativar Som';
-      } else {
-        btnModalAudio.innerHTML = '<span class="modal-control-icon">🔊</span> Sem Som';
-      }
-    }
 
     // Pausa o vídeo de origem
     sourceVideo.pause();
@@ -930,29 +914,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (parentContainer) parentContainer.classList.add('playing');
       
       activeMainVideoElement = null; // Reseta referência
-    }
-  };
-
-  // 7. Mute / Unmute do vídeo do modal
-  window.toggleModalVideoMute = function() {
-    if (!modalVideo || !btnModalAudio) return;
-    modalVideo.muted = !modalVideo.muted;
-    if (modalVideo.muted) {
-      btnModalAudio.innerHTML = '<span class="modal-control-icon">🔇</span> Ativar Som';
-    } else {
-      btnModalAudio.innerHTML = '<span class="modal-control-icon">🔊</span> Sem Som';
-    }
-  };
-
-  // 8. Fullscreen sem Zoom (contain) no clique de expandir dentro do modal
-  window.expandModalVideoFullscreen = function() {
-    if (!modalVideo) return;
-    if (modalVideo.requestFullscreen) {
-      modalVideo.requestFullscreen();
-    } else if (modalVideo.webkitRequestFullscreen) {
-      modalVideo.webkitRequestFullscreen();
-    } else if (modalVideo.msRequestFullscreen) {
-      modalVideo.msRequestFullscreen();
     }
   };
 
@@ -1058,4 +1019,11 @@ Gostaria de dar andamento com um assessor para aprovação do crédito.`;
   updateCalculator();
 
   console.log('🟡 RégliCred — Site carregado com sucesso');
+  } catch (error) {
+    console.error('🛑 ERRO CRÍTICO no JavaScript:', error);
+    console.error('Stack trace:', error.stack);
+    // Garante que o loading screen desapareça mesmo com erro
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) loadingScreen.classList.add('loaded');
+  }
 });

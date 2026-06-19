@@ -1881,6 +1881,22 @@ ul { list-style: none; }
   object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
   filter: brightness(0.85) saturate(0.95);
+  border-radius: 28px;
+}
+
+/* No hover do container, garante que controles nativos apareçam por cima */
+.video-container:hover video::-webkit-media-controls-panel {
+  opacity: 1 !important;
+}
+
+/* Quando o vídeo está em play, ajusta z-index da legenda para não sobrepor controles */
+.video-container.playing .video-caption-premium {
+  z-index: 3;
+  padding-bottom: 50px;
+}
+
+.video-container.playing:hover .video-caption-premium {
+  padding-bottom: 54px;
 }
 
 .video-container:hover video {
@@ -2051,8 +2067,8 @@ ul { list-style: none; }
 }
 
 .video-icon-btn {
-  width: 98px;
-  height: 98px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(11, 15, 25, 0.8);
   backdrop-filter: blur(12px);
@@ -2124,6 +2140,11 @@ ul { list-style: none; }
   flex-direction: column;
   gap: 12px;
   transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.video-caption-premium > * {
+  pointer-events: auto;
 }
 
 .video-container:hover .video-caption-premium {
@@ -2265,53 +2286,67 @@ ul { list-style: none; }
   height: 100%;
   object-fit: cover;
   background: #000;
+  border-radius: 24px;
+}
+
+/* Estilização da barra de controles nativa do HTML5 video */
+.video-modal-player-wrapper video::-webkit-media-controls {
+  border-radius: 0 0 24px 24px;
+  overflow: hidden;
+}
+
+.video-modal-player-wrapper video::-webkit-media-controls-panel {
+  background: linear-gradient(to top, rgba(11, 15, 25, 0.95) 0%, rgba(11, 15, 25, 0.7) 60%, transparent 100%) !important;
+  padding-bottom: 12px;
+}
+
+.video-modal-player-wrapper video::-webkit-media-controls-play-button {
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(10deg);
+  cursor: pointer;
+}
+
+.video-modal-player-wrapper video::-webkit-media-controls-timeline {
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.video-modal-player-wrapper video::-webkit-media-controls-current-time-display,
+.video-modal-player-wrapper video::-webkit-media-controls-time-remaining-display {
+  color: var(--off-white) !important;
+  font-family: var(--font-corpo) !important;
+  font-size: 0.75rem !important;
+  font-weight: 500;
+}
+
+.video-modal-player-wrapper video::-webkit-media-controls-volume-slider {
+  cursor: pointer;
+}
+
+.video-modal-player-wrapper video::-webkit-media-controls-fullscreen-button {
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(10deg);
+  cursor: pointer;
 }
 
 /* Quando entra em tela cheia do navegador, desativa o crop/zoom (object-fit: contain) */
 .video-modal-player-wrapper video:fullscreen {
   object-fit: contain !important;
   background-color: #000 !important;
+  border-radius: 0;
 }
 
 .video-modal-player-wrapper video:-webkit-full-screen {
   object-fit: contain !important;
   background-color: #000 !important;
+  border-radius: 0;
 }
 
+/* Remove os controles customizados antigos (mantido para compatibilidade se ainda existir em algum lugar) */
 .video-modal-controls {
-  position: absolute;
-  bottom: 24px;
-  left: 20px;
-  right: 20px;
-  display: flex;
-  gap: 12px;
-  z-index: 5;
+  display: none !important;
 }
 
 .video-modal-btn {
-  flex: 1;
-  padding: 10px 16px;
-  border-radius: 100px;
-  background: rgba(11, 15, 25, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--off-white);
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-}
-
-.video-modal-btn:hover {
-  background: var(--dourado);
-  color: var(--grafite);
-  border-color: var(--dourado);
-  transform: translateY(-2px);
+  display: none !important;
 }
 
 /* Coluna de Conteúdo */
@@ -2614,6 +2649,63 @@ ul { list-style: none; }
   border-color: rgba(226, 184, 66, 0.3);
   color: var(--dourado);
   transform: scale(1.1);
+}
+
+.video-card-premium .video-container .video-progress-bar,
+.sobre-media .video-container .video-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  z-index: 5;
+  cursor: pointer;
+  transition: height 0.3s ease;
+  border-radius: 0 0 28px 28px;
+  overflow: hidden;
+}
+
+.video-card-premium .video-container:hover .video-progress-bar,
+.sobre-media .video-container:hover .video-progress-bar {
+  height: 5px;
+}
+
+.video-card-premium .video-container .video-progress-fill,
+.sobre-media .video-container .video-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--dourado), var(--dourado-claro));
+  border-radius: 0 0 0 28px;
+  transition: width 0.1s linear;
+  position: relative;
+}
+
+.video-card-premium .video-container .video-progress-fill::after,
+.sobre-media .video-container .video-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--dourado);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(226, 184, 66, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-card-premium .video-container:hover .video-progress-fill::after,
+.sobre-media .video-container:hover .video-progress-fill::after {
+  opacity: 1;
+}
+
+.video-card-premium .video-container .video-progress-bar:hover .video-progress-fill::after,
+.sobre-media .video-container .video-progress-bar:hover .video-progress-fill::after {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
 }
 
 .video-info {
