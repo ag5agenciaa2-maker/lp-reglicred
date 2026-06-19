@@ -419,8 +419,53 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Inicializar visual da pilha
+    function goToNextCard() {
+      if (isAnimating) return;
+      isAnimating = true;
+      
+      const activeCard = cards[currentIndex];
+      activeCard.classList.add('swipe-out');
+      activeCard.style.transform = 'translate3d(120%, -30px, 0) scale(0.95) rotate(12deg)';
+      activeCard.style.opacity = '0';
+      
+      currentIndex = (currentIndex + 1) % cards.length;
+      
+      setTimeout(() => {
+        updateStack();
+      }, 80);
+      
+      setTimeout(() => {
+        activeCard.classList.remove('swipe-out');
+        isAnimating = false;
+      }, 450);
+    }
+
+    let autoplayInterval = null;
+    const autoplayDelay = 12000; // 12 segundos para leitura confortável
+
+    function startAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      autoplayInterval = setInterval(() => {
+        if (!isDragging && !isAnimating) {
+          goToNextCard();
+        }
+      }, autoplayDelay);
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }
+
+    function resetAutoplay() {
+      startAutoplay();
+    }
+
+    // Inicializar visual da pilha e autoplay
     updateStack();
+    startAutoplay();
 
     // Lógica premium de Swipe e Clique Físico no Card Ativo (Estilo Tinder/Stories)
     let startX = 0;
@@ -437,6 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = e.currentTarget;
       if (!card.classList.contains('active')) return;
 
+      stopAutoplay();
       isDragging = true;
       activeDragCard = card;
       dragDeltaX = 0;
@@ -544,6 +590,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 450);
         }
       }
+      resetAutoplay();
     }
 
     // Associar os eventos de drag/toque a todos os cards
@@ -555,30 +602,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Eventos de clique nas setas de navegação
     if (btnNext) {
       btnNext.addEventListener('click', () => {
-        if (isAnimating) return;
-        isAnimating = true;
-        
-        const activeCard = cards[currentIndex];
-        activeCard.classList.add('swipe-out');
-        activeCard.style.transform = 'translate3d(120%, -30px, 0) scale(0.95) rotate(12deg)';
-        activeCard.style.opacity = '0';
-        
-        currentIndex = (currentIndex + 1) % cards.length;
-        
-        setTimeout(() => {
-          updateStack();
-        }, 80);
-        
-        setTimeout(() => {
-          activeCard.classList.remove('swipe-out');
-          isAnimating = false;
-        }, 450);
+        resetAutoplay();
+        goToNextCard();
       });
     }
     
     if (btnPrev) {
       btnPrev.addEventListener('click', () => {
         if (isAnimating) return;
+        resetAutoplay();
         isAnimating = true;
         
         currentIndex = (currentIndex - 1 + cards.length) % cards.length;
@@ -918,8 +950,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ===== PARAR VÍDEOS AO SAIR DA SEÇÃO =====
-  const videosSection = document.getElementById('videos-premium');
-  if (videosSection) {
+  const sectionsWithVideos = document.querySelectorAll('#sobre, #videos-premium');
+  if (sectionsWithVideos.length > 0) {
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) {
@@ -941,7 +973,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, {
       threshold: 0
     });
-    videoObserver.observe(videosSection);
+    sectionsWithVideos.forEach(section => videoObserver.observe(section));
   }
 
   // ===== CALCULADORA DE EMPRÉSTIMO =====
