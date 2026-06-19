@@ -16,17 +16,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== NAVBAR SCROLL EFFECT =====
   const navbar = document.getElementById('navbar');
   let lastScroll = 0;
+  let navbarRafPending = false;
 
   window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
+    if (navbarRafPending) return;
+    navbarRafPending = true;
     
-    if (currentScroll > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-    
-    lastScroll = currentScroll;
+    requestAnimationFrame(() => {
+      const currentScroll = window.scrollY;
+      
+      if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+      navbarRafPending = false;
+    });
   }, { passive: true });
 
   // ===== MOBILE DRAWER =====
@@ -637,22 +644,43 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== NAVBAR LINK ACTIVE STATE =====
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
+  let sectionPositions = [];
+  let activeStateRafPending = false;
+
+  function cacheSectionPositions() {
+    sectionPositions = Array.from(sections).map(section => ({
+      id: section.getAttribute('id'),
+      top: section.offsetTop - 120
+    }));
+  }
+
+  // Cache inicial das posições após o load da página e redimensionamento
+  window.addEventListener('load', cacheSectionPositions);
+  window.addEventListener('resize', cacheSectionPositions, { passive: true });
 
   window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
-      if (window.scrollY >= sectionTop) {
-        current = section.getAttribute('id');
-      }
-    });
+    if (activeStateRafPending) return;
+    activeStateRafPending = true;
 
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      let current = '';
+
+      for (let i = 0; i < sectionPositions.length; i++) {
+        if (scrollY >= sectionPositions[i].top) {
+          current = sectionPositions[i].id;
+        }
       }
+
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      activeStateRafPending = false;
     });
   }, { passive: true });
 

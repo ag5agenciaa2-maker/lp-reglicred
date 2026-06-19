@@ -5,19 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Empréstimo Consignado Rio de Janeiro | RégliCred — Melhores Taxas</title>
   <link rel="shortcut icon" href="Assets/favicon-reglicred.ico" type="image/x-icon">
+  <!-- LCP image preload -->
+  <link rel="preload" href="Assets/reglicred-fachada-loja-sao-cristovao.webp" as="image" fetchpriority="high">
   <meta name="description" content="Empréstimo Consignado no Rio de Janeiro com as melhores taxas. Servidores públicos, aposentados e pensionistas. ~20 anos de experiência, 5.0 no Google. Simule agora na RégliCred.">
   <meta name="keywords" content="empréstimo consignado rio de janeiro, crédito consignado rj, empréstimo servidor público, consignado aposentado, refinanciamento consignado, portabilidade consignado, saque fgts, cartão consignado, réglicred, são cristóvão">
   <meta name="author" content="RégliCred Empréstimo Consignado">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://reglicred.com.br/">
-  <link rel="canonical" href="https://reglicred.com.br/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://assets.cdn.filesafe.space" crossorigin>
-  <link rel="preconnect" href="https://assets.cdn.filesafe.space" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Google Fonts: async-load -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  
+  <!-- CSS principal -->
+  <link rel="preload" href="style.css" as="style">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="cookie-banner.css">
+  
+  <!-- CSS não crítico (cookie banner): async-load -->
+  <link rel="preload" href="cookie-banner.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="cookie-banner.css"></noscript>
+  
+  <!-- CSS Crítico: Fontes Fallback -->
+  <style>
+    .hero-title { font-family: 'Sora', system-ui, -apple-system, sans-serif; }
+    .hero-subtitle { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  </style>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -47,22 +62,20 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "LocalBusiness",
-        "@id": "https://reglicred.com.br/#localbusiness",
-        "name": "RégliCred Empréstimo Consignado",
-        "alternateName": "RÉGLI CRED",
-        "description": "Empréstimo consignado para servidores públicos, aposentados e pensionistas no Rio de Janeiro. ~20 anos de experiência, menores taxas do mercado.",
-        "url": "https://reglicred.com.br/",
-        "telephone": "+5521980092063",
-        "email": "contato@reglicred.com.br",
-        "priceRange": "$$",
-        "image": "https://reglicred.com.br/Assets/reglicred-fachada-loja-sao-cristovao.webp",
-        "logo": "https://reglicred.com.br/Assets/logo-reglicred-desktop.webp",
-        "founder": {
-          "@type": "Person",
-          "name": "Sargento Régli"
-        },
-        "foundingDate": "2011",
+        "@type": "FinancialService",
+        "@id": "http://www.reglicred.ag5agencia.site/#negocio",
+        "name": "Réglicred emprestimo consignado",
+        "alternateName": "Réglicred | Empréstimo Consignado no Rio de Janeiro | Refinanciamento | Portabilidade | Cartão Consignado",
+        "url": "http://www.reglicred.ag5agencia.site/",
+        "logo": "http://www.reglicred.ag5agencia.site/Assets/logo-reglicred-desktop.webp",
+        "image": [
+          "http://www.reglicred.ag5agencia.site/Assets/reglicred-fachada-loja-sao-cristovao.webp",
+          "http://www.reglicred.ag5agencia.site/Assets/reglicred-acesso-cadeirante-fachada.webp"
+        ],
+        "description": "Empréstimo consignado no Rio de Janeiro com as melhores taxas para servidores públicos, aposentados e pensionistas. 20 anos de experiência e 5.0 no Google.",
+        "telephone": "+55-21-98009-2063",
+        "currenciesAccepted": "BRL",
+        "foundingDate": "2011-03-23",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "R. Eduardo Prado, 18",
@@ -73,43 +86,140 @@
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": -22.8975,
-          "longitude": -43.2235
+          "latitude": -22.9066304,
+          "longitude": -43.2162338
         },
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
             "opens": "08:00",
             "closes": "18:00"
           }
         ],
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Rio de Janeiro",
+            "containedInPlace": {
+              "@type": "State",
+              "name": "Rio de Janeiro"
+            }
+          },
+          { "@type": "Place", "name": "São Cristóvão" },
+          { "@type": "Place", "name": "Benfica" },
+          { "@type": "Place", "name": "Vasco da Gama" },
+          { "@type": "Place", "name": "Caju" },
+          { "@type": "Place", "name": "Mangueira" },
+          { "@type": "Place", "name": "Santo Cristo" }
+        ],
+        "founder": {
+          "@type": "Person",
+          "name": "Sargento Régli",
+          "jobTitle": "Fundador",
+          "description": "Ex-soldado da PMERJ que fundou a RégliCred em 2011 com o objetivo de oferecer assessoria financeira personalizada e transparente a servidores públicos."
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Serviços de Réglicred emprestimo consignado",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Empréstimo Novo",
+                "description": "Crédito consignado com as melhores condições para servidores públicos, aposentados e pensionistas. Análise rápida e dinheiro na conta em até 24 horas.",
+                "areaServed": "Rio de Janeiro – RJ",
+                "provider": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Refinanciamento",
+                "description": "Renegocie seu consignado atual e reduza as parcelas ou receba uma nova margem.",
+                "areaServed": "Rio de Janeiro – RJ",
+                "provider": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Portabilidade",
+                "description": "Transfira seu consignado para outro banco com taxas menores e melhores condições.",
+                "areaServed": "Rio de Janeiro – RJ",
+                "provider": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Cartão Consignado",
+                "description": "Cartão com desconto direto na folha de pagamento. Limite pré-aprovado sem consulta.",
+                "areaServed": "Rio de Janeiro – RJ",
+                "provider": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Saque FGTS",
+                "description": "Antecipe seu saque-aniversário do FGTS com segurança e receba em até 48 horas.",
+                "areaServed": "Rio de Janeiro – RJ",
+                "provider": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Compra de Dívida",
+                "description": "Quitamos suas dívidas com condições especiais e parcelamento que cabe no bolso.",
+                "areaServed": "Rio de Janeiro – RJ",
+                "provider": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" }
+              }
+            }
+          ]
+        },
         "aggregateRating": {
           "@type": "AggregateRating",
-          "ratingValue": "5.0",
+          "ratingValue": "5",
           "reviewCount": "255",
           "bestRating": "5",
           "worstRating": "1"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Rio de Janeiro",
-          "containedInPlace": {
-            "@type": "State",
-            "name": "Rio de Janeiro",
-            "containedInPlace": {
-              "@type": "Country",
-              "name": "Brasil"
-            }
-          }
-        },
         "sameAs": [
-          "https://instagram.com/regli_cred"
+          "https://share.google/MYcQ2PK3gVWAV5eID",
+          "https://www.instagram.com/regli_cred"
         ]
       },
       {
+        "@type": "WebSite",
+        "@id": "http://www.reglicred.ag5agencia.site/#website",
+        "url": "http://www.reglicred.ag5agencia.site/",
+        "name": "Réglicred | Empréstimo Consignado no Rio de Janeiro | Refinanciamento | Portabilidade | Cartão Consignado",
+        "publisher": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" },
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "http://www.reglicred.ag5agencia.site/#webpage",
+        "url": "http://www.reglicred.ag5agencia.site/",
+        "name": "Empréstimo Consignado Rio de Janeiro | RégliCred — Melhores Taxas",
+        "description": "Empréstimo Consignado no Rio de Janeiro com as melhores taxas. Servidores públicos, aposentados e pensionistas. ~20 anos de experiência, 5.0 no Google. Simule agora na RégliCred.",
+        "isPartOf": { "@id": "http://www.reglicred.ag5agencia.site/#website" },
+        "about": { "@id": "http://www.reglicred.ag5agencia.site/#negocio" },
+        "inLanguage": "pt-BR",
+        "datePublished": "2026-06-19",
+        "dateModified": "2026-06-19"
+      },
+      {
         "@type": "FAQPage",
-        "@id": "https://reglicred.com.br/#faq",
+        "@id": "http://www.reglicred.ag5agencia.site/#faq",
         "mainEntity": [
           {
             "@type": "Question",
@@ -160,15 +270,6 @@
             }
           }
         ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://reglicred.com.br/#website",
-        "url": "https://reglicred.com.br/",
-        "name": "RégliCred Empréstimo Consignado",
-        "publisher": {
-          "@id": "https://reglicred.com.br/#localbusiness"
-        }
       }
     ]
   }
@@ -185,7 +286,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" aria-label="Navegação principal">
     <div class="nav-container">
       <a href="#hero" class="nav-logo">
         <img src="Assets/logo-reglicred-desktop.webp" alt="RégliCred" class="logo-img" width="40" height="40" fetchpriority="high">
@@ -214,11 +315,11 @@
           <span class="badge-star">★★★★★</span>
           <span>5,0 no Google · 255 avaliações · ~20 anos no mercado</span>
         </div>
-        <h1 class="hero-title">Empréstimo Consignado com a <span class="gold">melhor taxa</span> do mercado</h1>
-        <p class="hero-subtitle">De servidor para servidor. Assessoria personalizada, estrutura própria e as menores taxas. Atendimento humano do início ao fim.</p>
+        <h1 class="hero-title">Empréstimo Consignado com <span class="gold">taxas competitivas</span></h1>
+        <p class="hero-subtitle">De servidor para servidor. Assessoria personalizada, estrutura própria e taxas atrativas. Atendimento humano do início ao fim.</p>
         <div class="hero-ctas">
           <a href="#simulador" class="hero-cta-btn">Quero Simular Agora</a>
-          <a href="https://wa.me/5521980092063?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20uma%20informa%C3%A7%C3%A3o." target="_blank" rel="noopener" class="hero-cta-btn btn-secondary">Falar no WhatsApp</a>
+          <a href="https://wa.me/5521980092063?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20uma%20informa%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="hero-cta-btn btn-secondary" aria-label="Fale conosco pelo WhatsApp – Contato Principal">Falar no WhatsApp</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -267,7 +368,7 @@
           
           <ul class="min-list">
             <li><span>De servidor para servidor:</span> Assessoria humana e totalmente personalizada.</li>
-            <li><span>Menor taxa garantida:</span> Economia real e garantida em cada contratação.</li>
+            <li><span>Taxas competitivas:</span> Economia real com taxas otimizadas para o seu perfil.</li>
             <li><span>Sede física própria:</span> Conforto, segurança jurídica e privacidade em São Cristóvão.</li>
           </ul>
         </div>
@@ -302,7 +403,7 @@
             </div>
             <h3>Empréstimo Novo</h3>
             <p>Crédito consignado com as melhores condições para servidores públicos, aposentados e pensionistas. Análise rápida e dinheiro na conta em até 24 horas.</p>
-            <a href="#cta" class="svc-tile-link">
+            <a href="#cta" class="svc-tile-link" aria-label="Simular agora Empréstimo Consignado Novo">
               <span>Simular agora</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -321,7 +422,7 @@
             </div>
             <h3>Refinanciamento</h3>
             <p>Renegocie seu consignado atual e reduza as parcelas ou receba uma nova margem.</p>
-            <a href="#cta" class="svc-tile-link">
+            <a href="#cta" class="svc-tile-link" aria-label="Saiba mais sobre Refinanciamento">
               <span>Saiba mais</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -340,7 +441,7 @@
             </div>
             <h3>Portabilidade</h3>
             <p>Transfira seu consignado para outro banco com taxas menores e melhores condições.</p>
-            <a href="#cta" class="svc-tile-link">
+            <a href="#cta" class="svc-tile-link" aria-label="Saiba mais sobre Portabilidade">
               <span>Saiba mais</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -358,8 +459,8 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
             </div>
             <h3>Cartão Consignado</h3>
-            <p>Cartão com desconto direto na folha de pagamento. Limite pré-aprovado sem consulta.</p>
-            <a href="#cta" class="svc-tile-link">
+            <p>Cartão com desconto em folha e margem reservada. Limite pré-aprovado sujeito a margem consignável.</p>
+            <a href="#cta" class="svc-tile-link" aria-label="Saiba mais sobre Cartão Consignado">
               <span>Saiba mais</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -378,7 +479,7 @@
             </div>
             <h3>Saque FGTS</h3>
             <p>Antecipe seu saque-aniversário do FGTS com segurança e receba em até 48 horas.</p>
-            <a href="#cta" class="svc-tile-link">
+            <a href="#cta" class="svc-tile-link" aria-label="Saiba mais sobre Saque FGTS">
               <span>Saiba mais</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -396,8 +497,8 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
             <h3>Compra de Dívida</h3>
-            <p>Quitamos suas dívidas com condições especiais e parcelamento que cabe no bolso.</p>
-            <a href="#cta" class="svc-tile-link">
+            <p>Reduza o valor das suas parcelas consolidando seus contratos com condições especiais.</p>
+            <a href="#cta" class="svc-tile-link" aria-label="Saiba mais sobre Compra de Dívida">
               <span>Saiba mais</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
@@ -580,9 +681,9 @@
             </div>
             
             <!-- Botão de Ação -->
-            <a href="javascript:void(0);" target="_blank" rel="noopener" class="calc-cta-btn" id="calc-whatsapp-btn" onclick="openCalcWhatsApp(event)">
+            <a href="javascript:void(0);" target="_blank" rel="noopener noreferrer" class="calc-cta-btn" id="calc-whatsapp-btn" onclick="openCalcWhatsApp(event)" aria-label="Solicitar Análise de Crédito baseada na simulação">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966a9.9 9.9 0 0 0-6.98-2.779c-5.443 0-9.874 4.372-9.879 9.802-.002 1.742.475 3.442 1.382 4.962l-.948 3.46 3.621-.931zm10.978-5.385c-.3-.15-1.771-.875-2.071-.984-.3-.11-.518-.15-.738.18-.219.33-.849 1.077-1.04 1.297-.19.22-.382.24-.682.09-.3-.15-1.269-.468-2.417-1.494-.892-.797-1.495-1.782-1.67-2.083-.176-.3-.018-.462.132-.612.135-.135.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.738-1.782-1.012-2.445-.267-.643-.538-.553-.738-.563-.19-.01-.41-.01-.63-.01s-.578.083-.88.411c-.3.33-1.144 1.12-1.144 2.73s1.173 3.16 1.332 3.38c.16.22 2.308 3.52 5.592 4.937.781.337 1.39.539 1.86.687.785.25 1.498.214 2.062.13.628-.094 1.771-.724 2.021-1.425.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35z"/></svg>
-              Garantir esta Simulação
+              Solicitar Análise de Crédito
             </a>
             <span class="calc-footer-info">*Simulação informativa de referência. O valor real depende de margem consignável e convênio.</span>
           </div>
@@ -879,7 +980,7 @@
           <div class="faq-cta-box">
             <h4>Ainda com dúvidas?</h4>
             <p>Fale diretamente com um de nossos assessores de crédito agora mesmo e tire suas dúvidas de forma rápida.</p>
-            <a href="https://wa.me/5521980092063?text=Olá,%20estava%20vendo%20as%20dúvidas%20frequentes%20no%20site%20e%20gostaria%20de%20ajuda." target="_blank" rel="noopener" class="faq-cta-link">
+            <a href="https://wa.me/5521980092063?text=Olá,%20estava%20vendo%20as%20dúvidas%20frequentes%20no%20site%20e%20gostaria%20de%20ajuda." target="_blank" rel="noopener noreferrer" class="faq-cta-link" aria-label="Fale conosco pelo WhatsApp – Dúvidas Frequentes">
               <span>Chamar no WhatsApp</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -998,14 +1099,14 @@
               <span>Imperial de São Cristóvão · Rio de Janeiro — RJ</span>
             </div>
           </div>
-          <a href="https://www.google.com/maps/dir//R.+Eduardo+Prado,+18+-+Imperial+de+S%C3%A3o+Crist%C3%B3v%C3%A3o,+Rio+de+Janeiro+-+RJ,+20940-020" target="_blank" rel="noopener" class="lmin-route">
+          <a href="https://www.google.com/maps/dir//R.+Eduardo+Prado,+18+-+Imperial+de+S%C3%A3o+Crist%C3%B3v%C3%A3o,+Rio+de+Janeiro+-+RJ,+20940-020" target="_blank" rel="noopener noreferrer" class="lmin-route" aria-label="Traçar rota no Google Maps para a RégliCred">
             Traçar rota
           </a>
         </div>
 
         <!-- Grid de contato: apenas WhatsApp + Horário -->
         <div class="local-min-grid reveal" data-delay="300">
-          <a href="https://wa.me/5521980092063?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20uma%20informa%C3%A7%C3%A3o." target="_blank" rel="noopener" class="lmin-card lmin-card--wa">
+          <a href="https://wa.me/5521980092063?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20uma%20informa%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" class="lmin-card lmin-card--wa" aria-label="Fale conosco pelo WhatsApp – Localização">
             <div class="lmin-card-icon">
               <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </div>
@@ -1050,7 +1151,7 @@
             Atendimento em minutos
           </span>
           <h2>Pronto para simular seu <span class="gold">empréstimo consignado</span>?</h2>
-          <p>Preencha o formulário e nossa equipe entrará em contato. Atendimento personalizado, as melhores taxas e toda a segurança de quem tem ~20 anos de mercado.</p>
+          <p>Preencha o formulário e nossa equipe entrará em contato. Atendimento personalizado, taxas atrativas e toda a segurança de quem tem ~20 anos de mercado.</p>
           <ul class="cta-benefits">
             <li>
               <div class="cb-icon">
@@ -1133,7 +1234,7 @@
             <img src="Assets/logo-reglicred-desktop.webp" alt="RégliCred" class="footer-logo-img" width="40" height="40" loading="lazy">
           </a>
           <p>Empréstimo Consignado e Assessoria Financeira. Criada por servidor, para servidor. ~20 anos de mercado.</p>
-          <a href="https://instagram.com/regli_cred" target="_blank" rel="noopener" class="footer-instagram" aria-label="Instagram RégliCred">
+          <a href="https://instagram.com/regli_cred" target="_blank" rel="noopener noreferrer" class="footer-instagram" aria-label="Acesse o Instagram da RégliCred">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
         </div>
@@ -1175,7 +1276,7 @@
             </a>
           </p>
           <p class="contact-item">
-            <a href="https://wa.me/5521980092063?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20uma%20informa%C3%A7%C3%A3o." target="_blank" rel="noopener">
+            <a href="https://wa.me/5521980092063?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20uma%20informa%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp – Rodapé">
               <span class="contact-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               </span>
@@ -1209,7 +1310,7 @@
           </div>
         </div>
         <div class="footer-credits-right">
-          <p>Desenvolvido por <a href="https://www.ag5agencia.com.br" target="_blank" rel="noopener" class="ag5-link">AG5 Agência</a></p>
+          <p>Desenvolvido por <a href="https://www.ag5agencia.com.br" target="_blank" rel="noopener noreferrer" class="ag5-link" aria-label="Acesse o site da AG5 Agência">AG5 Agência</a></p>
         </div>
       </div>
     </div>
@@ -1260,7 +1361,7 @@
 
   <!-- Mobile Drawer (posicionado no final do body para evitar stacking context issues) -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
-  <aside class="drawer" id="drawer" aria-hidden="true">
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Navegação móvel">
     <div class="drawer-header">
       <a href="#hero" class="drawer-logo" id="drawer-logo-link">
         <img src="Assets/logo-reglicred-mobile.webp" alt="RégliCred" class="logo-img" width="40" height="40" fetchpriority="high">
@@ -1270,7 +1371,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
-    <nav class="drawer-nav">
+    <nav class="drawer-nav" aria-label="Menu móvel">
       <ul class="drawer-menu">
         <li><a href="#hero" class="drawer-link">Início</a></li>
         <li><a href="#servicos" class="drawer-link">Serviço</a></li>
@@ -1338,7 +1439,7 @@
               <h3 class="ck-category__name">Funcional</h3>
               <p class="ck-category__desc">Ajudam a executar funcionalidades como compartilhamento em mídia social e recursos de terceiros.</p>
             </div>
-            <label class="ck-toggle" aria-label="Ativar cookies funcionais">
+            <label class="ck-toggle" aria-label="Ativar cookies funcionais" for="ck-functional">
               <input type="checkbox" id="ck-functional" name="functional">
               <span class="ck-toggle__slider"></span>
             </label>
@@ -1350,7 +1451,7 @@
               <h3 class="ck-category__name">Analítico</h3>
               <p class="ck-category__desc">Usados para entender como os visitantes interagem com o site (visitantes, taxa de rejeição, etc.).</p>
             </div>
-            <label class="ck-toggle" aria-label="Ativar cookies analíticos">
+            <label class="ck-toggle" aria-label="Ativar cookies analíticos" for="ck-analytics">
               <input type="checkbox" id="ck-analytics" name="analytics">
               <span class="ck-toggle__slider"></span>
             </label>
@@ -1362,7 +1463,7 @@
               <h3 class="ck-category__name">Desempenho</h3>
               <p class="ck-category__desc">Analisam índices de desempenho do site para oferecer melhor experiência ao visitante.</p>
             </div>
-            <label class="ck-toggle" aria-label="Ativar cookies de desempenho">
+            <label class="ck-toggle" aria-label="Ativar cookies de desempenho" for="ck-performance">
               <input type="checkbox" id="ck-performance" name="performance">
               <span class="ck-toggle__slider"></span>
             </label>
@@ -1374,7 +1475,7 @@
               <h3 class="ck-category__name">Publicidade</h3>
               <p class="ck-category__desc">Entregam anúncios personalizados com base nas páginas visitadas anteriormente.</p>
             </div>
-            <label class="ck-toggle" aria-label="Ativar cookies de publicidade">
+            <label class="ck-toggle" aria-label="Ativar cookies de publicidade" for="ck-advertising">
               <input type="checkbox" id="ck-advertising" name="advertising">
               <span class="ck-toggle__slider"></span>
             </label>

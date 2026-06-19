@@ -5201,3 +5201,23 @@ body.drawer-open {
     padding: 24px 16px !important;
   }
 }
+
+/* ==========================================================
+   PageSpeed & Accessibility Optimizations (AG5)
+   ========================================================== */
+.footer-legal-links a {
+    padding: 8px 4px;
+    display: inline-block;
+    min-height: 44px;
+}
+
+/* Dots de navegação nos depoimentos com área de toque mínima */
+.stack-control-btn {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.wa-float-btn {
+    min-width: 44px;
+    min-height: 44px;
+}
