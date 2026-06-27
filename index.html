@@ -619,7 +619,7 @@
           <div class="calc-benefits">
             <div class="calc-benefit-item">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gold"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Taxas a partir de 1,20% ao mês</span>
+              <span>Taxa de 1,80% ao mês para aposentados e pensionistas do INSS</span>
             </div>
             <div class="calc-benefit-item">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gold"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -633,12 +633,16 @@
         </div>
         
         <div class="calc-card reveal">
-          <!-- Abas de Modalidade -->
-          <div class="calc-tabs">
-            <button class="calc-tab active" data-taxa="0.0125" onclick="setCalcTab(this)">Novo</button>
-            <button class="calc-tab" data-taxa="0.0120" onclick="setCalcTab(this)">Portabilidade</button>
-            <button class="calc-tab" data-taxa="0.0132" onclick="setCalcTab(this)">Refinanciamento</button>
+          <!-- Seleção de Órgão / Convênio -->
+          <div class="calc-tabs" role="group" aria-label="Selecione seu órgão ou convênio">
+            <button class="calc-tab active" data-orgao="INSS" data-taxa="0.018" onclick="selectOrgao(this)">INSS</button>
+            <button class="calc-tab" data-orgao="Militares" onclick="selectOrgao(this)">Militares</button>
+            <button class="calc-tab" data-orgao="Governos" onclick="selectOrgao(this)">Governos</button>
+            <button class="calc-tab" data-orgao="Federal Civil" onclick="selectOrgao(this)">Federal Civil</button>
+            <button class="calc-tab" data-orgao="Prefeituras" onclick="selectOrgao(this)">Prefeituras</button>
+            <button class="calc-tab" data-orgao="CLT" onclick="selectOrgao(this)">CLT</button>
           </div>
+          <p class="calc-orgao-hint">Simulação on-line disponível para <strong>INSS</strong>. Para os demais órgãos, fale com um assessor no WhatsApp.</p>
           
           <div class="calc-body">
             <!-- Controle de Valor -->
@@ -671,18 +675,18 @@
             <div class="calc-result">
               <div class="calc-result-item">
                 <span class="result-label">Parcela Estimada</span>
-                <span class="result-value" id="calc-parcela-val">R$ 573,81</span>
+                <span class="result-value" id="calc-parcela-val">R$ 695,40</span>
               </div>
               <div class="calc-result-divider"></div>
               <div class="calc-result-item">
                 <span class="result-label">Taxa Mensal</span>
-                <span class="result-value-sub" id="calc-taxa-val">1,25% a.m.</span>
+                <span class="result-value-sub" id="calc-taxa-val">1,80% a.m.</span>
               </div>
             </div>
             
             <!-- Botão de Ação -->
             <a href="javascript:void(0);" target="_blank" rel="noopener noreferrer" class="calc-cta-btn" id="calc-whatsapp-btn" onclick="openCalcWhatsApp(event)" aria-label="Solicitar Análise de Crédito baseada na simulação">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966a9.9 9.9 0 0 0-6.98-2.779c-5.443 0-9.874 4.372-9.879 9.802-.002 1.742.475 3.442 1.382 4.962l-.948 3.46 3.621-.931zm10.978-5.385c-.3-.15-1.771-.875-2.071-.984-.3-.11-.518-.15-.738.18-.219.33-.849 1.077-1.04 1.297-.19.22-.382.24-.682.09-.3-.15-1.269-.468-2.417-1.494-.892-.797-1.495-1.782-1.67-2.083-.176-.3-.018-.462.132-.612.135-.135.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.738-1.782-1.012-2.445-.267-.643-.538-.553-.738-.563-.19-.01-.41-.01-.63-.01s-.578.083-.88.411c-.3.33-1.144 1.12-1.144 2.73s1.173 3.16 1.332 3.38c.16.22 2.308 3.52 5.592 4.937.781.337 1.39.539 1.86.687.785.25 1.498.214 2.062.13.628-.094 1.771-.724 2.021-1.425.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966a9.9 9.9 0 0 0-6.98-2.779c-5.443 0-9.874 4.372-9.879 9.802-.002 1.742.475 3.442 1.382 4.962l-.948 3.46 3.621-.931zm10.978-5.385c-.3-.15-1.771-.875-2.071-.984-.3-.11-.518-.15-.738.18-.219.33-.849 1.077-1.04 1.297-.19.22-.382.24-.682.09-.3-.15-1.269-.468-2.417-1.494-.892-.797-1.495-1.782-1.67-2.083-.176-.3-.018-.462.132-.612.135-.135.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.738-1.782-1.012-2.445-.267-.643-.538-.553-.738-.563-.19-.01-.41-.01-.63-.01s-.578.083-.88.411c-.3.33-1.144 1.12-1.144 2.73s1.173 3.16 1.332 3.38c.16.22 2.308 3.52 5.592 4.937.781.337 1.39.539 1.86.687.785.25 1.498.214 2.062.13.628-.094 1.771-.724 2.021-1.425.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35z"/></svg>
               Solicitar Análise de Crédito
             </a>
             <span class="calc-footer-info">*Simulação informativa de referência. O valor real depende de margem consignável e convênio.</span>

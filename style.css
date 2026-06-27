@@ -1391,33 +1391,61 @@ ul { list-style: none; }
 
 .calc-tabs {
   display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: 32px;
-  gap: 4px;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 .calc-tab {
-  flex: 1;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
   color: var(--cinza-nevoa);
-  font-family: var(--font-titulo);
-  font-size: 0.875rem;
+  font-family: var(--font-corpo);
+  font-size: clamp(0.62rem, 1.05vw, 0.74rem);
   font-weight: 600;
-  padding: 12px 8px;
+  letter-spacing: -0.01em;
+  padding: 11px 4px;
   cursor: pointer;
   transition: all 0.3s var(--transition);
+  text-align: center;
+  line-height: 1.2;
 }
 
 .calc-tab:hover {
   color: var(--off-white);
+  border-color: rgba(226, 184, 66, 0.3);
 }
 
 .calc-tab.active {
   color: var(--dourado);
-  border-bottom-color: var(--dourado);
-  background: rgba(226, 184, 66, 0.03);
+  border-color: var(--dourado);
+  background: rgba(226, 184, 66, 0.06);
+}
+
+.calc-orgao-hint {
+  font-size: 0.8125rem;
+  color: var(--cinza-nevoa);
+  margin-bottom: 28px;
+  line-height: 1.4;
+}
+
+.calc-orgao-hint strong {
+  color: var(--dourado);
+}
+
+/* Em telas menores, os órgãos se reorganizam em 3 colunas (2 linhas) sem quebrar o texto */
+@media (max-width: 768px) {
+  .calc-tabs {
+    flex-wrap: wrap;
+  }
+  .calc-tab {
+    flex: 1 1 calc(33.333% - 4px);
+    font-size: 0.78rem;
+    padding: 11px 6px;
+  }
 }
 
 .calc-body {
@@ -5070,7 +5098,12 @@ body.drawer-open {
   .footer-contact {
     text-align: left !important;
   }
-  
+
+  /* Cada item de contato em sua própria linha no mobile (telefone abaixo do endereço) */
+  .contact-item {
+    display: flex;
+  }
+
   .footer-bottom {
     flex-direction: column !important;
     align-items: flex-start !important;

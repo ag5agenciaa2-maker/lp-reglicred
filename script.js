@@ -1005,9 +1005,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===== CALCULADORA DE EMPRÉSTIMO =====
-  window.setCalcTab = function(btn) {
-    const tabs = document.querySelectorAll('.calc-tab');
-    tabs.forEach(t => t.classList.remove('active'));
+  // Seleção de órgão: o INSS (com data-taxa) abre o simulador;
+  // os demais órgãos não simulam e direcionam para o WhatsApp.
+  window.selectOrgao = function(btn) {
+    const taxa = btn.getAttribute('data-taxa');
+
+    // Órgão sem simulador (sem taxa) → redireciona para o WhatsApp
+    if (!taxa) {
+      const orgao = btn.getAttribute('data-orgao') || '';
+      const msg = `Olá, sou do órgão ${orgao} e gostaria de simular meu empréstimo consignado.`;
+      window.open(`https://wa.me/5521980092063?text=${encodeURIComponent(msg)}`, '_blank');
+      return;
+    }
+
+    // Órgão simulável (INSS) → ativa o botão e recalcula
+    document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     updateCalculator();
   };
@@ -1027,7 +1039,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const parcelas = parseInt(parcSlider.value);
     
     const activeTab = document.querySelector('.calc-tab.active');
-    const taxa = activeTab ? parseFloat(activeTab.getAttribute('data-taxa')) : 0.0125;
+    const taxa = activeTab ? parseFloat(activeTab.getAttribute('data-taxa')) : 0.018;
 
     // Atualiza os textos dos displays
     valTxt.innerText = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
@@ -1044,11 +1056,12 @@ document.addEventListener('DOMContentLoaded', () => {
     parcelaVal.innerText = parcelaFormatada;
 
     // Atualiza o link do WhatsApp com mensagem personalizada estruturada
-    const activeTabName = activeTab ? activeTab.innerText : 'Novo';
+    const orgaoName = activeTab ? (activeTab.getAttribute('data-orgao') || activeTab.innerText) : 'INSS';
     const whatsappBaseUrl = "https://wa.me/5521980092063";
     const whatsappText = `Olá, realizei uma simulação no site e gostaria de garantir minhas condições:
-    
-- Serviço: Empréstimo Consignado (${activeTabName})
+
+- Órgão: ${orgaoName}
+- Serviço: Empréstimo Consignado
 - Valor Simulado: R$ ${valor.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}
 - Prazo Simulado: ${parcelas} parcelas (meses)
 - Parcela Estimada: ${parcelaFormatada}
