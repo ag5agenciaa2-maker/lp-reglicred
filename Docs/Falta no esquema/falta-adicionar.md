@@ -29,10 +29,13 @@
 
 - [x] `geo.latitude` / `geo.longitude` — Derivadas diretamente das coordenadas verificadas do Google/Pleper na raiz: -22.9066304, -43.2162338
 - [x] `name` — Oficial do Google Business Profile na raiz: Réglicred emprestimo consignado
-- [x] `alternateName` — Otimizado com palavras-chave: Réglicred | Empréstimo Consignado no Rio de Janeiro | Refinanciamento | Portabilidade | Cartão Consignado
+- [x] `alternateName` — Fórmula AG5 (ETAPA 1.5): Empréstimo Consignado São Cristóvão RJ - Réglicred | Empréstimo Consignado | Assessoria Financeira
 - [x] `areaServed` — São Cristóvão (bairro base) + 5 vizinhos mapeados (Benfica, Vasco da Gama, Caju, Mangueira, Santo Cristo)
 - [x] `aggregateRating` — Nota 5 e 255 avaliações inseridas com base no Google/Pleper
-- [x] `sameAs` — Link do Google Business Profile e Instagram mapeados na raiz
+- [x] `identifier.Google CID` — 11328772947665087584 (ETAPA 1.6)
+- [x] `identifier.Google Place ID` — ChIJP0njMuhvmQARYOyhNvniN50 (ETAPA 1.6)
+- [x] `hasMap` + `sameAs[0]` — URL canônica https://maps.google.com/?cid=11328772947665087584 (substituiu o share.google opaco)
+- [x] `sameAs` — CID canônico do Google + Instagram (@regli_cred)
 
 ---
 

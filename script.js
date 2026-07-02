@@ -184,15 +184,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (valid) {
         // Build WhatsApp message with structured list (Skill AG5 format)
         const tipoOperacao = operacao.options[operacao.selectedIndex].text;
-        const mensagemExtra = mensagem.value.trim() ? mensagem.value.trim() : 'Não informada';
-        
-        const whatsappText = `Olá, me chamo ${nome.value.trim()}, vim através do site e gostaria de uma informação.
+        const mensagemExtra = mensagem && mensagem.value.trim() ? mensagem.value.trim() : '';
+
+        let whatsappText = `Olá, me chamo ${nome.value.trim()}, vim através do site e gostaria de uma informação.
 
 - E-mail: ${email.value.trim()}
 - Telefone: ${telefone.value}
-- Serviço: ${tipoOperacao}
-- Situação: ${mensagemExtra}`;
-        
+- Operação: ${tipoOperacao}`;
+        if (mensagemExtra) whatsappText += `\n- Mensagem: ${mensagemExtra}`;
+
         const whatsappUrl = `https://wa.me/5521980092063?text=${encodeURIComponent(whatsappText)}`;
         window.open(whatsappUrl, '_blank');
       }
@@ -689,59 +689,89 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== SCROLL TO TOP ON PAGE LOAD =====
   window.scrollTo(0, 0);
 
-  // ===== WHATSAPP PREMIUM EXPERIENCE =====
-  function initWaPremium() {
-    const bubble = document.getElementById('wa-message-bubble');
-    const typing = document.getElementById('wa-typing');
-    const realMessage = document.getElementById('wa-real-message');
-    const badge = document.getElementById('wa-notification');
-    const closeBtn = document.getElementById('wa-close-btn');
-    const mainBtn = document.getElementById('wa-main-btn');
+  // ===== WHATSAPP PREMIUM EXPERIENCE (AG5 V4) =====
+  (function initWaPremium() {
+    // Nicho financeiro/consignado = RIGOROSO → sem badge de notificação fabricada
+    const MODO_COMPLIANCE = true;
 
-    if (!bubble) return;
+    const bubble        = document.getElementById('wa-message-bubble');
+    const typing        = document.getElementById('wa-typing');
+    const realMessage   = document.getElementById('wa-real-message');
+    const badge         = document.getElementById('wa-notification');
+    const closeBtn      = document.getElementById('wa-close-btn');
+    const mainBtn       = document.getElementById('wa-main-btn');
+    const targetSection = document.getElementById('servicos'); // 3ª seção (gatilho)
 
-    // 1. Mostrar o balão após 6 segundos
-    setTimeout(() => {
-      bubble.classList.add('show');
-      
-      // 2. Simular digitação por 2.5 segundos antes de mostrar a mensagem
-      setTimeout(() => {
-        typing.style.display = 'none';
-        realMessage.style.display = 'block';
-        realMessage.style.opacity = '0';
-        realMessage.style.transform = 'translateY(8px)';
-        realMessage.style.transition = 'all 0.4s ease';
-        
-        requestAnimationFrame(() => {
-          realMessage.style.opacity = '1';
-          realMessage.style.transform = 'translateY(0)';
-        });
-      }, 2500);
+    if (!bubble || !typing || !realMessage || !closeBtn || !mainBtn || !targetSection) return;
 
-    }, 6000);
+    const DELAY_BALAO            = 25000; // 25s após entrar na seção
+    const DURATION_TYPING        = 2500;  // 2.5s de "digitando..."
+    const DURATION_BALAO_VISIVEL = 15000; // 15s exibido depois de aparecer
+    const DELAY_BADGE_APOS_SUMIR = 5000;  // 5s após sumir → badge (só nicho tranquilo)
 
-    // Fechar balão
-    if (closeBtn) {
-      closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        bubble.classList.remove('show');
-        // Mostrar notificação após fechar para manter engajamento
-        setTimeout(() => {
-          if (badge) badge.classList.add('show');
-        }, 2000);
+    let triggered = false;
+    let autoHideTimer = null;
+    let badgeTimer = null;
+    let userClosed = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !triggered) {
+          triggered = true;
+
+          // Botão flutuante aparece imediatamente
+          mainBtn.classList.add('visible');
+
+          // t=25s → balão sobe
+          setTimeout(() => {
+            if (userClosed) return;
+            bubble.classList.add('show');
+
+            // 2.5s de "digitando..." → mensagem real (classes utilitárias, sem inline style)
+            setTimeout(() => {
+              if (userClosed) return;
+              typing.classList.add('is-hidden');
+              realMessage.classList.add('is-visible');
+              requestAnimationFrame(() => realMessage.classList.add('is-in'));
+            }, DURATION_TYPING);
+
+            // balão some automaticamente
+            autoHideTimer = setTimeout(() => {
+              if (userClosed) return;
+              bubble.classList.remove('show');
+
+              if (!MODO_COMPLIANCE && badge) {
+                badgeTimer = setTimeout(() => {
+                  if (userClosed) return;
+                  badge.classList.add('show');
+                }, DELAY_BADGE_APOS_SUMIR);
+              }
+            }, DURATION_BALAO_VISIVEL);
+          }, DELAY_BALAO);
+        }
       });
-    }
+    }, { threshold: 0.1 });
 
-    // Ao clicar no botão, remove tudo
-    if (mainBtn) {
-      mainBtn.addEventListener('click', () => {
-        bubble.classList.remove('show');
-        if (badge) badge.classList.remove('show');
-      });
-    }
-  }
+    observer.observe(targetSection);
 
-  initWaPremium();
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      userClosed = true;
+      bubble.classList.remove('show');
+      if (autoHideTimer) clearTimeout(autoHideTimer);
+      if (badgeTimer) clearTimeout(badgeTimer);
+      if (!MODO_COMPLIANCE && badge) {
+        setTimeout(() => { badge.classList.add('show'); }, DELAY_BADGE_APOS_SUMIR);
+      }
+    });
+
+    mainBtn.addEventListener('click', () => {
+      bubble.classList.remove('show');
+      if (badge) badge.classList.remove('show');
+      if (autoHideTimer) clearTimeout(autoHideTimer);
+      if (badgeTimer) clearTimeout(badgeTimer);
+    });
+  })();
 
   // ===== SERVIÇOS SPOTLIGHT GRID =====
   const servicosSection = document.getElementById('servicos');
@@ -1013,7 +1043,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Órgão sem simulador (sem taxa) → redireciona para o WhatsApp
     if (!taxa) {
       const orgao = btn.getAttribute('data-orgao') || '';
-      const msg = `Olá, sou do órgão ${orgao} e gostaria de simular meu empréstimo consignado.`;
+      const msg = `Olá, vim através do site e gostaria de simular meu empréstimo consignado (órgão: ${orgao}).`;
       window.open(`https://wa.me/5521980092063?text=${encodeURIComponent(msg)}`, '_blank');
       return;
     }
@@ -1058,16 +1088,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Atualiza o link do WhatsApp com mensagem personalizada estruturada
     const orgaoName = activeTab ? (activeTab.getAttribute('data-orgao') || activeTab.innerText) : 'INSS';
     const whatsappBaseUrl = "https://wa.me/5521980092063";
-    const whatsappText = `Olá, realizei uma simulação no site e gostaria de garantir minhas condições:
+    const whatsappText = `Olá, vim através do site e gostaria de solicitar uma análise de crédito com base na minha simulação:
 
 - Órgão: ${orgaoName}
-- Serviço: Empréstimo Consignado
+- Operação: Empréstimo Consignado
 - Valor Simulado: R$ ${valor.toLocaleString('pt-BR', { maximumFractionDigits: 0 })}
 - Prazo Simulado: ${parcelas} parcelas (meses)
 - Parcela Estimada: ${parcelaFormatada}
-- Taxa Mensal Referência: ${(taxa * 100).toFixed(2)}% a.m.
-    
-Gostaria de dar andamento com um assessor para aprovação do crédito.`;
+- Taxa Mensal Referência: ${(taxa * 100).toFixed(2)}% a.m.`;
 
     whatsappBtn.href = `${whatsappBaseUrl}?text=${encodeURIComponent(whatsappText)}`;
   };
